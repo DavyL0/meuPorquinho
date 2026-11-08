@@ -1,0 +1,172 @@
+<div class="topbar">
+  <div>
+    <div class="topbar-title">Dashboard</div>
+    <div class="topbar-sub">Bem-vindo de volta, {{ usuario()?.nome }} 👋</div>
+  </div>
+  <div class="topbar-actions">
+    <select class="select-sm" (change)="onMesChange($any($event.target).value)">
+      @for (mes of mesesDisponiveis; track mes.valor) {
+        <option [value]="mes.valor">{{ mes.label }}</option>
+      }
+    </select>
+    <a routerLink="/lancamentos" class="btn btn-primary">➕ Lançamento</a>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- Métricas -->
+  <div class="metrics">
+    <div class="metric-card blue">
+      <div class="metric-label">Entradas</div>
+      <div class="metric-value blue">
+        {{ resumo()?.totalEntradas | currency:'BRL':'symbol':'1.2-2' }}
+      </div>
+    </div>
+    <div class="metric-card red">
+      <div class="metric-label">Gastos</div>
+      <div class="metric-value red">
+        {{ resumo()?.totalGastos | currency:'BRL':'symbol':'1.2-2' }}
+      </div>
+    </div>
+    <div class="metric-card purple">
+      <div class="metric-label">Investimentos</div>
+      <div class="metric-value purple">
+        {{ resumo()?.totalInvestimentos | currency:'BRL':'symbol':'1.2-2' }}
+      </div>
+    </div>
+    <div class="metric-card green">
+      <div class="metric-label">Saldo livre</div>
+      <div class="metric-value"
+           [class.green]="(resumo()?.saldo ?? 0) >= 0"
+           [class.red]="(resumo()?.saldo ?? 0) < 0">
+        {{ resumo()?.saldo | currency:'BRL':'symbol':'1.2-2' }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Gráficos -->
+  <div class="grid-2">
+
+    <!-- Evolução mensal -->
+    <div class="card">
+      <div class="chart-title">Evolução mensal</div>
+      <div class="chart-sub">Últimos 6 meses</div>
+      @if (evolucao().length) {
+        <canvas baseChart
+                [data]="barData()"
+                [options]="barOptions"
+                type="bar">
+        </canvas>
+      } @else {
+        <div class="empty">
+          <div class="empty-icon">📊</div>
+          <div class="empty-title">Sem dados ainda</div>
+          <div class="empty-sub">Adicione lançamentos para ver o gráfico.</div>
+        </div>
+      }
+    </div>
+
+    <!-- Donut categorias -->
+    <div class="card">
+      <div class="chart-title">Gastos por categoria</div>
+      <div class="chart-sub">{{ mesAtual() | date:'MMMM yyyy':'':'pt' }}</div>
+      @if (categorias().length) {
+        <div class="donut-wrap">
+          <canvas baseChart
+                  [data]="donutData()"
+                  [options]="donutOptions"
+                  type="doughnut"
+                  style="max-width:130px">
+          </canvas>
+          <div class="donut-legend">
+            @for (cat of categorias(); track cat.categoria) {
+              <div class="legend-item">
+                <span class="legend-dot"
+                      [style.background]="corCategoria(cat.categoria)"></span>
+                <span class="legend-name">{{ cat.categoria }}</span>
+                <span class="legend-val">
+                  {{ cat.total | currency:'BRL':'symbol':'1.0-0' }}
+                </span>
+              </div>
+            }
+          </div>
+        </div>
+      } @else {
+        <div class="empty">
+          <div class="empty-icon">🍩</div>
+          <div class="empty-title">Sem gastos no período</div>
+        </div>
+      }
+    </div>
+
+  </div>
+
+  <!-- Últimos lançamentos + progresso -->
+  <div class="grid-2">
+
+    <div class="card">
+      <div class="section-header">
+        <div class="section-title">Últimos lançamentos</div>
+        <a routerLink="/historico" class="section-link">Ver todos →</a>
+      </div>
+
+      @if (recentes().length) {
+        @for (l of recentes(); track l.id) {
+          <div class="recente-row">
+            <div class="recente-icon"
+                 [style.background]="bgTipo(l.tipo)">
+              {{ iconeTipo(l.tipo) }}
+            </div>
+            <div class="recente-info">
+              <div class="recente-desc">{{ l.descricao }}</div>
+              <div class="recente-meta">
+                {{ l.data | date:'dd/MM' }} · {{ l.categoria }}
+              </div>
+            </div>
+            <span class="amount"
+                  [class.pos]="l.tipo === 'ENTRADA'"
+                  [class.neg]="l.tipo === 'GASTO'"
+                  [class.neu]="l.tipo === 'INVESTIMENTO'">
+              {{ l.tipo === 'ENTRADA' ? '+' : '-' }}
+              {{ l.valor | currency:'BRL':'symbol':'1.2-2' }}
+            </span>
+          </div>
+        }
+      } @else {
+        <div class="empty">
+          <div class="empty-icon">📋</div>
+          <div class="empty-title">Nenhum lançamento ainda</div>
+          <div class="empty-sub">
+            <a routerLink="/lancamentos" class="section-link">Adicionar agora</a>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Progresso por categoria -->
+    <div class="card">
+      <div class="section-header">
+        <div class="section-title">Distribuição de gastos</div>
+      </div>
+      @for (cat of categorias(); track cat.categoria) {
+        <div class="prog-item">
+          <div class="prog-header">
+            <span class="prog-name">{{ cat.categoria }}</span>
+            <span class="prog-val">
+              {{ cat.total | currency:'BRL':'symbol':'1.0-0' }}
+            </span>
+          </div>
+          <div class="prog-bar">
+            <div class="prog-fill"
+                 [style.width.%]="pctCategoria(cat.total)"
+                 [style.background]="corCategoria(cat.categoria)">
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+
+  </div>
+
+</div>

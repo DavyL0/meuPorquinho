@@ -1,0 +1,47 @@
+<div class="shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-mark">
+        <div class="logo-icon">💰</div>
+        <div>
+          <div class="logo-text">Porquinho</div>
+          <div class="logo-sub">Finanças pessoais</div>
+        </div>
+      </div>
+    </div>
+
+    <nav>
+      <p class="nav-label">Principal</p>
+
+      @for (item of navItems; track item.route) {
+        <a class="nav-item"
+           [routerLink]="item.route"
+           routerLinkActive="active">
+          <span class="icon">{{ item.icon }}</span>
+          {{ item.label }}
+        </a>
+      }
+
+      <p class="nav-label">Conta</p>
+      <button class="nav-item" (click)="sair()">
+        <span class="icon">🚪</span> Sair
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="avatar">{{ usuario?.nome?.charAt(0) }}</div>
+      <div class="avatar-info">
+        <div class="avatar-name">{{ usuario?.nome }}</div>
+        <div class="avatar-email">{{ usuario?.email }}</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- CONTEÚDO DA ROTA -->
+  <div class="main">
+    <router-outlet />
+  </div>
+
+</div>
