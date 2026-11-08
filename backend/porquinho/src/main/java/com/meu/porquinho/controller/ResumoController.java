@@ -3,7 +3,7 @@ package com.meu.porquinho.controller;
 import com.meu.porquinho.dto.resumo.ResumoCategoriaDTO;
 import com.meu.porquinho.dto.resumo.ResumoComparativoDTO;
 import com.meu.porquinho.dto.resumo.ResumoDTO;
-import com.meu.porquinho.dto.lancamento.ResumoMensalDTO;
+import com.meu.porquinho.dto.resumo.ResumoMensalDTO;
 import com.meu.porquinho.service.ResumoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

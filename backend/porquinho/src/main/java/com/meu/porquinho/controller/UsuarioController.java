@@ -2,6 +2,7 @@ package com.meu.porquinho.controller;
 
 import com.meu.porquinho.dto.usuario.AlterarSenhaRequest;
 import com.meu.porquinho.dto.usuario.AtualizarPerfilRequest;
+import com.meu.porquinho.dto.usuario.ExcluirContaRequest;
 import com.meu.porquinho.dto.usuario.UsuarioEstatisticaDTO;
 import com.meu.porquinho.dto.usuario.UsuarioPerfilDTO;
 import com.meu.porquinho.service.UsuarioService;
@@ -53,9 +54,9 @@ public class UsuarioController {
     @DeleteMapping("/me")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void excluirConta(
-            @RequestParam String senha,
+            @RequestBody @Valid ExcluirContaRequest req,
             @AuthenticationPrincipal UserDetails user
     ) {
-        usuarioService.excluirConta(user.getUsername(), senha);
+        usuarioService.excluirConta(user.getUsername(), req.getSenha());
     }
 }
