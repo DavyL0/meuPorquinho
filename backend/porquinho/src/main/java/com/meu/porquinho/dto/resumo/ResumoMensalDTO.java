@@ -1,6 +1,5 @@
-package com.meu.porquinho.dto.lancamento;
+package com.meu.porquinho.dto.resumo;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

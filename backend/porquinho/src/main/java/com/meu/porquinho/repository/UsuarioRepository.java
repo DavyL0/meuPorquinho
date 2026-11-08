@@ -17,16 +17,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, UUID> {
 
     boolean existsByEmail(String email);
 
-    // busca com lançamentos já carregados (evita N+1)
-    @Query("""
-        SELECT u FROM Usuario u
-        WHERE u.email = :email
-    """)
-    Optional<Usuario> findByEmailComLancamentos(
-            @Param("email") String email,
-            @Param("mes")   String mes
-    );
-
     // estatística geral do usuário
     @Query("""
         SELECT NEW com.meu.porquinho.dto.usuario.UsuarioEstatisticaDTO(

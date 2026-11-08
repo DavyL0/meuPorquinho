@@ -1,6 +1,5 @@
 package com.meu.porquinho.dto.usuario;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

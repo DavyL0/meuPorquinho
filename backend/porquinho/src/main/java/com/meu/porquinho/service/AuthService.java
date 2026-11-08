@@ -1,9 +1,8 @@
 package com.meu.porquinho.service;
 
-import com.meu.porquinho.dto.usuario.AlterarSenhaRequest;
 import com.meu.porquinho.dto.usuario.LoginRequest;
 import com.meu.porquinho.dto.usuario.LoginResponse;
-import com.meu.porquinho.dto.lancamento.RegistroRequest;
+import com.meu.porquinho.dto.usuario.RegistroRequest;
 import com.meu.porquinho.model.Usuario;
 import com.meu.porquinho.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -65,21 +64,10 @@ public class AuthService {
         return montarResposta(usuario);
     }
 
-    public void alterarSenha(String email, AlterarSenhaRequest req) {
-        Usuario usuario = buscarPorEmail(email);
-
-        if (!encoder.matches(req.getSenhaAtual(), usuario.getSenha())) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "Senha atual incorreta");
-        }
-        usuario.setSenha(encoder.encode(req.getNovaSenha()));
-        usuarioRepo.save(usuario);
-    }
-
     private LoginResponse montarResposta(Usuario usuario) {
         String token = jwtService.gerarToken((UserDetails) usuario);
         return new LoginResponse(token, usuario.getNome(),
-                usuario.getEmail(), 86400000L);
+                usuario.getEmail(), jwtService.getExpiration());
     }
 
     private Usuario buscarPorEmail(String email) {

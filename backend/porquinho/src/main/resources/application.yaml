@@ -1,8 +1,10 @@
 spring:
   datasource:
-    url:      jdbc:postgresql://localhost:5432/financas
-    username: financas_user
-    password: financas_pass
+    # Em producao, defina DB_URL, DB_USER e DB_PASSWORD como variaveis de ambiente.
+    # Os valores padrao abaixo existem apenas para desenvolvimento local (docker-compose).
+    url:      ${DB_URL:jdbc:postgresql://localhost:5432/financas}
+    username: ${DB_USER:financas_user}
+    password: ${DB_PASSWORD:financas_pass}
     hikari:
       maximum-pool-size:    10
       minimum-idle:          2
@@ -25,5 +27,8 @@ spring:
     baseline-on-migrate: true
 
 jwt:
-  secret: ${JWT_SECRET:9a4f2c3d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b9c0d1e2f}
+  # ATENCAO: esta chave padrao serve APENAS para desenvolvimento local.
+  # Em qualquer ambiente real, defina a variavel de ambiente JWT_SECRET
+  # (Base64 com pelo menos 64 bytes de entropia).
+  secret: ${JWT_SECRET:b6VkMcjo9+cs6WX7yhWHGjJ863bbklUMwx+plGj+6u8NcgkEZsYDG5Jqi36SRkpRAvuESptNYwXfQrt9UIj87Q==}
   expiration: ${JWT_EXPIRATION:3600000}

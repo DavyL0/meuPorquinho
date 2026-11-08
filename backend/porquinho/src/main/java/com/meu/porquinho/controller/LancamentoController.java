@@ -12,7 +12,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.data.domain.Pageable;
 import java.util.UUID;
 
 @RestController
@@ -32,7 +31,13 @@ public class LancamentoController {
             @AuthenticationPrincipal UserDetails user
     ) {
         return service.filtrar(user.getUsername(), tipo, categoria, mesAno,
-                (Pageable) PageRequest.of(page, size));
+                PageRequest.of(page, size));
+    }
+
+    @GetMapping("/{id}")
+    public LancamentoDTO buscarPorId(@PathVariable UUID id,
+                                     @AuthenticationPrincipal UserDetails user) {
+        return service.buscarPorId(user.getUsername(), id);
     }
 
     @PostMapping
@@ -40,6 +45,13 @@ public class LancamentoController {
     public LancamentoDTO criar(@RequestBody @Valid LancamentoDTO dto,
                                @AuthenticationPrincipal UserDetails user) {
         return service.criar(user.getUsername(), dto);
+    }
+
+    @PutMapping("/{id}")
+    public LancamentoDTO atualizar(@PathVariable UUID id,
+                                   @RequestBody @Valid LancamentoDTO dto,
+                                   @AuthenticationPrincipal UserDetails user) {
+        return service.atualizar(user.getUsername(), id, dto);
     }
 
     @DeleteMapping("/{id}")

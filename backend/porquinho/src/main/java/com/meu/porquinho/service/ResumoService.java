@@ -3,10 +3,11 @@ package com.meu.porquinho.service;
 import com.meu.porquinho.dto.resumo.ResumoCategoriaDTO;
 import com.meu.porquinho.dto.resumo.ResumoComparativoDTO;
 import com.meu.porquinho.dto.resumo.ResumoDTO;
-import com.meu.porquinho.dto.lancamento.ResumoMensalDTO;
+import com.meu.porquinho.dto.resumo.ResumoMensalDTO;
 import com.meu.porquinho.model.Usuario;
 import com.meu.porquinho.repository.LancamentoRepository;
 import com.meu.porquinho.repository.UsuarioRepository;
+import com.meu.porquinho.util.DataUtils;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -30,13 +31,15 @@ public class ResumoService {
 
     public ResumoDTO resumoGeral(String email, String mesAno) {
         UUID usuarioId = buscarUsuarioId(email);
-        ResumoDTO resumo = lancamentoRepo.calcularResumo(usuarioId, mesAno);
+        ResumoDTO resumo = lancamentoRepo.calcularResumo(usuarioId,
+                DataUtils.inicioDe(mesAno), DataUtils.fimExclusivoDe(mesAno));
         return normalizar(resumo);
     }
 
     public List<ResumoCategoriaDTO> gastosPorCategoria(String email, String mesAno) {
         UUID usuarioId = buscarUsuarioId(email);
-        return lancamentoRepo.gastosPorCategoria(usuarioId, mesAno);
+        return lancamentoRepo.gastosPorCategoria(usuarioId,
+                DataUtils.inicioDe(mesAno), DataUtils.fimExclusivoDe(mesAno));
     }
 
     public List<ResumoMensalDTO> evolucaoMensal(String email, int ultimosMeses) {
@@ -51,8 +54,10 @@ public class ResumoService {
                                             String mesAnterior) {
         UUID usuarioId = buscarUsuarioId(email);
 
-        ResumoDTO atual    = normalizar(lancamentoRepo.calcularResumo(usuarioId, mesAtual));
-        ResumoDTO anterior = normalizar(lancamentoRepo.calcularResumo(usuarioId, mesAnterior));
+        ResumoDTO atual    = normalizar(lancamentoRepo.calcularResumo(usuarioId,
+                DataUtils.inicioDe(mesAtual), DataUtils.fimExclusivoDe(mesAtual)));
+        ResumoDTO anterior = normalizar(lancamentoRepo.calcularResumo(usuarioId,
+                DataUtils.inicioDe(mesAnterior), DataUtils.fimExclusivoDe(mesAnterior)));
 
         return ResumoComparativoDTO.builder()
                 .mesAtual(atual)

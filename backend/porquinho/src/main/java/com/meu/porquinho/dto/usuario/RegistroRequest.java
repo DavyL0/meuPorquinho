@@ -1,4 +1,4 @@
-package com.meu.porquinho.dto.lancamento;
+package com.meu.porquinho.dto.usuario;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

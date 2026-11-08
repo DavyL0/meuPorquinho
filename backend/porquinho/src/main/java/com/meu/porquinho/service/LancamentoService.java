@@ -6,6 +6,7 @@ import com.meu.porquinho.model.TipoLancamento;
 import com.meu.porquinho.model.Usuario;
 import com.meu.porquinho.repository.LancamentoRepository;
 import com.meu.porquinho.repository.UsuarioRepository;
+import com.meu.porquinho.util.DataUtils;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -32,7 +33,9 @@ public class LancamentoService {
                                        Pageable pageable) {
         Usuario usuario = buscarUsuario(email);
         return lancamentoRepo
-                .filtrar(usuario.getId(), tipo, categoria, mesAno, pageable)
+                .filtrar(usuario.getId(), tipo, categoria,
+                        DataUtils.inicioDe(mesAno), DataUtils.fimExclusivoDe(mesAno),
+                        pageable)
                 .map(LancamentoDTO::from);
     }
 
