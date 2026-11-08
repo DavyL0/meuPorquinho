@@ -1,0 +1,101 @@
+<div class="topbar">
+  <div>
+    <div class="topbar-title">Perfil</div>
+    <div class="topbar-sub">Suas informações e configurações</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="perfil-wrap">
+
+    @if (sucesso()) {
+      <div class="alert-success">✓ {{ sucesso() }}</div>
+    }
+    @if (erro()) {
+      <div class="alert-error">{{ erro() }}</div>
+    }
+
+    <!-- Avatar e stats -->
+    <div class="card perfil-header">
+      <div class="avatar avatar-lg">
+        {{ usuario()?.nome?.charAt(0) }}
+      </div>
+      <div>
+        <div class="perfil-nome">{{ usuario()?.nome }}</div>
+        <div class="perfil-email">{{ usuario()?.email }}</div>
+        <div class="perfil-desde">
+          Membro desde
+          {{ usuario()?.createdAt | date:'MMMM yyyy':'':'pt' }}
+        </div>
+      </div>
+      <div class="perfil-stat">
+        <div class="stat-val">{{ estatistica()?.totalLancamentos ?? 0 }}</div>
+        <div class="stat-label">lançamentos</div>
+      </div>
+    </div>
+
+    <!-- Dados pessoais -->
+    <div class="card">
+      <div class="section-title" style="margin-bottom:18px">Dados pessoais</div>
+      <form [formGroup]="formPerfil" (ngSubmit)="salvarPerfil()">
+        <div class="field-row">
+          <div class="field">
+            <label>Nome</label>
+            <input formControlName="nome" type="text"/>
+          </div>
+          <div class="field">
+            <label>E-mail</label>
+            <input formControlName="email" type="email"/>
+          </div>
+        </div>
+        <button type="submit"
+                class="btn btn-primary"
+                [disabled]="formPerfil.invalid || formPerfil.pristine">
+          Salvar alterações
+        </button>
+      </form>
+    </div>
+
+    <!-- Alterar senha -->
+    <div class="card">
+      <div class="section-title" style="margin-bottom:18px">Alterar senha</div>
+      <form [formGroup]="formSenha" (ngSubmit)="alterarSenha()">
+        <div class="field">
+          <label>Senha atual</label>
+          <input formControlName="senhaAtual" type="password" placeholder="••••••••"/>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Nova senha</label>
+            <input formControlName="novaSenha" type="password" placeholder="Mínimo 6 caracteres"/>
+          </div>
+          <div class="field">
+            <label>Confirmar nova senha</label>
+            <input formControlName="confirmar" type="password" placeholder="Repita a nova senha"/>
+          </div>
+        </div>
+        @if (formSenha.errors?.['senhasDiferentes'] && formSenha.touched) {
+          <span class="field-error">As senhas não coincidem.</span>
+        }
+        <button type="submit"
+                class="btn btn-primary"
+                [disabled]="formSenha.invalid">
+          Alterar senha
+        </button>
+      </form>
+    </div>
+
+    <!-- Zona de perigo -->
+    <div class="card danger-card">
+      <div class="section-title danger-title">Zona de perigo</div>
+      <p class="danger-desc">
+        Excluir sua conta remove permanentemente todos os seus lançamentos.
+        Esta ação não pode ser desfeita.
+      </p>
+      <button class="btn btn-danger" (click)="excluirConta()">
+        Excluir minha conta
+      </button>
+    </div>
+
+  </div>
+</div>

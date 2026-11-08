@@ -1,0 +1,123 @@
+<div class="topbar">
+  <div>
+    <div class="topbar-title">Novo lançamento</div>
+    <div class="topbar-sub">Registre uma entrada, gasto ou investimento</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="form-section">
+
+    @if (sucesso()) {
+      <div class="alert-success">✓ Lançamento registrado com sucesso!</div>
+    }
+    @if (erro()) {
+      <div class="alert-error">{{ erro() }}</div>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="salvar()">
+
+      <!-- Tipo -->
+      <div class="field">
+        <label>Tipo de lançamento</label>
+        <div class="tipo-selector">
+          <div class="tipo-opt"
+               [class.active-gasto]="tipoAtual === 'GASTO'"
+               (click)="setTipo('GASTO')">
+            💸 Gasto
+          </div>
+          <div class="tipo-opt"
+               [class.active-invest]="tipoAtual === 'INVESTIMENTO'"
+               (click)="setTipo('INVESTIMENTO')">
+            📈 Investimento
+          </div>
+          <div class="tipo-opt"
+               [class.active-entrada]="tipoAtual === 'ENTRADA'"
+               (click)="setTipo('ENTRADA')">
+            💰 Entrada
+          </div>
+        </div>
+      </div>
+
+      <!-- Valor + Data -->
+      <div class="field-row">
+        <div class="field">
+          <label>Valor (R$)</label>
+          <input formControlName="valor"
+                 type="number"
+                 step="0.01"
+                 placeholder="0,00"
+                 [class.input-error]="invalido('valor')"/>
+          @if (invalido('valor')) {
+            <span class="field-error">Informe um valor válido.</span>
+          }
+        </div>
+        <div class="field">
+          <label>Data</label>
+          <input formControlName="data"
+                 type="date"
+                 [class.input-error]="invalido('data')"/>
+        </div>
+      </div>
+
+      <!-- Descrição -->
+      <div class="field">
+        <label>Descrição</label>
+        <input formControlName="descricao"
+               type="text"
+               placeholder="Ex: Supermercado, Salário, PETR4..."
+               [class.input-error]="invalido('descricao')"/>
+        @if (invalido('descricao')) {
+          <span class="field-error">Descrição é obrigatória.</span>
+        }
+      </div>
+
+      <!-- Categoria + Pagamento (só para GASTO) -->
+      @if (mostrarCategoria) {
+        <div class="field-row">
+          <div class="field">
+            <label>Categoria</label>
+            <select formControlName="categoria">
+              @for (cat of categorias; track cat) {
+                <option [value]="cat">{{ cat }}</option>
+              }
+            </select>
+          </div>
+          <div class="field">
+            <label>Forma de pagamento</label>
+            <select formControlName="pagamento">
+              <option>Débito</option>
+              <option>Crédito</option>
+              <option>Pix</option>
+              <option>Dinheiro</option>
+              <option>Boleto</option>
+            </select>
+          </div>
+        </div>
+      }
+
+      <!-- Observação -->
+      <div class="field">
+        <label>Observação (opcional)</label>
+        <input formControlName="obs"
+               type="text"
+               placeholder="Detalhes adicionais..."/>
+      </div>
+
+      <!-- Ações -->
+      <div class="form-actions">
+        <button type="submit"
+                class="btn btn-primary"
+                [disabled]="loading()">
+          @if (loading()) { Salvando... } @else { ✓ Salvar lançamento }
+        </button>
+        <button type="button"
+                class="btn btn-ghost"
+                (click)="limpar()">
+          Limpar
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="login-page">
+  <div class="login-card">
+
+    <div class="login-logo">
+      <div class="logo-icon">💰</div>
+      <h1>Porquinho</h1>
+      <p>Controle financeiro pessoal</p>
+    </div>
+
+    @if (erro()) {
+      <div class="alert-error">{{ erro() }}</div>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="entrar()">
+
+      <div class="field">
+        <label>E-mail</label>
+        <input formControlName="email"
+               type="email"
+               placeholder="seu@email.com"
+               [class.input-error]="invalido('email')"/>
+        @if (invalido('email')) {
+          <span class="field-error">Informe um e-mail válido.</span>
+        }
+      </div>
+
+      <div class="field">
+        <label>Senha</label>
+        <div class="input-wrap">
+          <input formControlName="senha"
+                 [type]="senhaVisivel() ? 'text' : 'password'"
+                 placeholder="Mínimo 6 caracteres"
+                 [class.input-error]="invalido('senha')"/>
+          <button type="button"
+                  class="toggle-senha"
+                  (click)="senhaVisivel.set(!senhaVisivel())">
+            {{ senhaVisivel() ? '🙈' : '👁' }}
+          </button>
+        </div>
+        @if (invalido('senha')) {
+          <span class="field-error">Informe sua senha.</span>
+        }
+      </div>
+
+      <button type="submit"
+              class="login-btn"
+              [disabled]="loading()">
+        @if (loading()) { Entrando... } @else { Entrar }
+      </button>
+
+    </form>
+
+    <div class="login-footer">
+      Não tem conta?
+      <a routerLink="/registro" class="login-link">Criar conta</a>
+    </div>
+
+  </div>
+</div>

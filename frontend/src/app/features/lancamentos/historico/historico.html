@@ -1,0 +1,135 @@
+<div class="topbar">
+  <div>
+    <div class="topbar-title">Histórico</div>
+    <div class="topbar-sub">{{ total() }} lançamentos encontrados</div>
+  </div>
+  <div class="topbar-actions">
+    <button class="btn btn-ghost" (click)="exportarCsv()">⬇ Exportar CSV</button>
+    <a routerLink="/lancamentos" class="btn btn-primary">➕ Novo</a>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- Filtros -->
+  <div class="card filter-card" [formGroup]="filtros">
+    <div class="filter-grid">
+      <div class="field">
+        <label>Tipo</label>
+        <select formControlName="tipo">
+          <option value="">Todos</option>
+          <option value="GASTO">Gasto</option>
+          <option value="INVESTIMENTO">Investimento</option>
+          <option value="ENTRADA">Entrada</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Categoria</label>
+        <select formControlName="categoria">
+          <option value="">Todas</option>
+          @for (cat of categorias; track cat) {
+            <option [value]="cat">{{ cat }}</option>
+          }
+        </select>
+      </div>
+      <div class="field">
+        <label>Mês</label>
+        <input type="month" formControlName="mesAno"/>
+      </div>
+      <div class="field">
+        <label>Buscar</label>
+        <input type="text"
+               formControlName="busca"
+               placeholder="🔍 Descrição..."/>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabela -->
+  <div class="card table-card">
+
+    @if (loading()) {
+      <div class="empty"><div class="empty-icon">⏳</div>Carregando...</div>
+    } @else if (!lancamentos().length) {
+      <div class="empty">
+        <div class="empty-icon">📋</div>
+        <div class="empty-title">Nenhum lançamento encontrado</div>
+        <div class="empty-sub">Tente ajustar os filtros ou
+          <a routerLink="/lancamentos" class="section-link">adicionar um novo</a>.
+        </div>
+      </div>
+    } @else {
+      <div class="table-wrap">
+        <table>
+          <thead>
+          <tr>
+            <th>Data</th>
+            <th>Descrição</th>
+            <th>Categoria</th>
+            <th>Tipo</th>
+            <th style="text-align:right">Valor</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+            @for (l of lancamentos(); track l.id) {
+              <tr>
+                <td>
+                  <span class="tag">
+                    {{ l.data | date:'dd/MM/yy' }}
+                  </span>
+                </td>
+                <td>
+                  <span class="row-desc">{{ l.descricao }}</span>
+                </td>
+                <td>
+                  <span class="badge-cat">{{ l.categoria }}</span>
+                </td>
+                <td>
+                  <span class="badge"
+                        [class.badge-gasto]="l.tipo === 'GASTO'"
+                        [class.badge-invest]="l.tipo === 'INVESTIMENTO'"
+                        [class.badge-entrada]="l.tipo === 'ENTRADA'">
+                    ● {{ l.tipo | titlecase }}
+                  </span>
+                </td>
+                <td style="text-align:right">
+                  <span class="amount"
+                        [class.pos]="l.tipo === 'ENTRADA'"
+                        [class.neg]="l.tipo === 'GASTO'"
+                        [class.neu]="l.tipo === 'INVESTIMENTO'">
+                    {{ l.tipo === 'ENTRADA' ? '+' : '-' }}
+                    {{ l.valor | currency:'BRL':'symbol':'1.2-2' }}
+                  </span>
+                </td>
+                <td>
+                  <button class="icon-btn"
+                          (click)="remover(l.id)"
+                          title="Remover">🗑</button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Paginação -->
+      <div class="pagination">
+        <span class="pagination-info">
+          {{ pagina() * tamanho + 1 }}–
+          {{ min((pagina() + 1) * tamanho, total()) }}
+          de {{ total() }}
+        </span>
+        <div class="pagination-btns">
+          <button class="btn btn-ghost"
+                  [disabled]="!temAnterior"
+                  (click)="paginaAnterior()">← Anterior</button>
+          <button class="btn btn-ghost"
+                  [disabled]="!temProxima"
+                  (click)="proximaPagina()">Próxima →</button>
+        </div>
+      </div>
+    }
+
+  </div>
+</div>
