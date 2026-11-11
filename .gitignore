@@ -60,3 +60,28 @@ hs_err_pid*
 replay_pid*
 
 # End of https://www.toptal.com/developers/gitignore/api/java,angular
+
+### Segredos e variáveis de ambiente ###
+.env
+.env.*
+!.env.example
+!.env.sample
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+application-secret*.yaml
+application-secret*.yml
+application-secret*.properties
+
+### Ferramentas de IA (arquivos locais de agentes) ###
+.agents/
+.augment/
+.claude/
+.codebuddy/
+.codewhale/
+.continue/
+.cursor/
+.factory/
+.codex/
