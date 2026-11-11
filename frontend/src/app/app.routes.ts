@@ -8,6 +8,7 @@ import { LancamentoFormComponent } from './features/lancamentos/form/form';
 import { HistoricoComponent } from './features/lancamentos/historico/historico';
 import { RelatoriosComponent } from './features/relatorios/relatorios';
 import { PerfilComponent } from './features/perfil/perfil';
+import { InvestimentosComponent } from './features/investimentos/investimentos';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -21,6 +22,7 @@ export const routes: Routes = [
       { path: 'lancamentos', component: LancamentoFormComponent },
       { path: 'historico', component: HistoricoComponent },
       { path: 'relatorios', component: RelatoriosComponent },
+      { path: 'investimentos', component: InvestimentosComponent },
       { path: 'perfil', component: PerfilComponent },
       { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
     ],

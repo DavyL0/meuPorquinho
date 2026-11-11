@@ -1,0 +1,171 @@
+<div class="topbar">
+  <div>
+    <div class="topbar-title">Investimentos</div>
+    <div class="topbar-sub">Alertas de cripto com cotação da Binance, notificados por e-mail</div>
+  </div>
+  <div class="topbar-actions">
+    <button class="btn btn-ghost" (click)="carregar()">🔄 Atualizar cotações</button>
+  </div>
+</div>
+
+<div class="content">
+
+  @if (sucesso()) {
+    <div class="alert-success">✓ {{ sucesso() }}</div>
+  }
+  @if (erro()) {
+    <div class="alert-error">{{ erro() }}</div>
+  }
+
+  <!-- Novo investimento -->
+  <div class="card">
+    <div class="section-title" style="margin-bottom:18px">Cadastrar investimento</div>
+    <form [formGroup]="form" (ngSubmit)="salvar()">
+      <div class="invest-form-grid">
+        <div class="field">
+          <label>Ativo (par Binance)</label>
+          <select formControlName="simbolo">
+            @for (s of simbolos; track s) {
+              <option [value]="s">{{ s }}</option>
+            }
+          </select>
+        </div>
+        <div class="field">
+          <label>Quantidade</label>
+          <input formControlName="quantidade"
+                 type="number"
+                 step="any"
+                 placeholder="Ex: 0.05"
+                 [class.input-error]="invalido('quantidade')"/>
+          @if (invalido('quantidade')) {
+            <span class="field-error">Informe a quantidade comprada.</span>
+          }
+        </div>
+        <div class="field">
+          <label>Preço pago (unitário, R$)</label>
+          <input formControlName="valorInicial"
+                 type="number"
+                 step="any"
+                 placeholder="Ex: 350000"
+                 [class.input-error]="invalido('valorInicial')"/>
+          @if (invalido('valorInicial')) {
+            <span class="field-error">Informe o preço unitário pago.</span>
+          }
+        </div>
+        <div class="field">
+          <label>Alertar ao variar (%)</label>
+          <input formControlName="percentualAlerta"
+                 type="number"
+                 step="any"
+                 placeholder="Ex: 10"
+                 [class.input-error]="invalido('percentualAlerta')"/>
+          @if (invalido('percentualAlerta')) {
+            <span class="field-error">Percentual inválido.</span>
+          }
+        </div>
+        <div class="field">
+          <label>Direção do alerta</label>
+          <select formControlName="direcao">
+            <option value="AMBOS">⚡ Alta ou queda</option>
+            <option value="ALTA">📈 Somente alta</option>
+            <option value="QUEDA">📉 Somente queda</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="salvando()">
+        @if (salvando()) { Salvando... } @else { 🔔 Criar alerta }
+      </button>
+    </form>
+  </div>
+
+  <!-- Tabela de investimentos -->
+  <div class="card table-card">
+    @if (loading()) {
+      <div class="empty"><div class="empty-icon">⏳</div>Carregando cotações...</div>
+    } @else if (!investimentos().length) {
+      <div class="empty">
+        <div class="empty-icon">🪙</div>
+        <div class="empty-title">Nenhum investimento cadastrado</div>
+        <div class="empty-sub">Cadastre acima para receber alertas por e-mail.</div>
+      </div>
+    } @else {
+      <div class="table-wrap">
+        <table>
+          <thead>
+          <tr>
+            <th>Ativo</th>
+            <th style="text-align:right">Qtd</th>
+            <th style="text-align:right">Preço pago</th>
+            <th style="text-align:right">Cotação atual</th>
+            <th style="text-align:right">Variação</th>
+            <th style="text-align:right">Valor atual</th>
+            <th>Alerta</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+            @for (inv of investimentos(); track inv.id) {
+              <tr>
+                <td><span class="row-desc">{{ inv.simbolo }}</span></td>
+                <td style="text-align:right">{{ inv.quantidade }}</td>
+                <td style="text-align:right">
+                  {{ inv.valorInicial | currency:'BRL':'symbol':'1.2-2' }}
+                </td>
+                <td style="text-align:right">
+                  @if (inv.cotacaoAtual != null) {
+                    {{ inv.cotacaoAtual | currency:'BRL':'symbol':'1.2-2' }}
+                  } @else {
+                    <span class="badge-cat">—</span>
+                  }
+                </td>
+                <td style="text-align:right">
+                  @if (inv.variacaoPercentual != null) {
+                    <span class="amount" [class]="'amount ' + classeVariacao(inv.variacaoPercentual)">
+                      {{ inv.variacaoPercentual > 0 ? '+' : '' }}{{ inv.variacaoPercentual | number:'1.2-2' }}%
+                    </span>
+                  } @else {
+                    <span class="badge-cat">—</span>
+                  }
+                </td>
+                <td style="text-align:right">
+                  @if (inv.valorTotalAtual != null) {
+                    {{ inv.valorTotalAtual | currency:'BRL':'symbol':'1.2-2' }}
+                  } @else {
+                    <span class="badge-cat">—</span>
+                  }
+                </td>
+                <td>
+                  <span class="badge-cat">
+                    {{ descricaoDirecao(inv.direcao) }} · {{ inv.percentualAlerta }}%
+                  </span>
+                </td>
+                <td>
+                  @if (inv.ativo) {
+                    <span class="badge badge-entrada">● Ativo</span>
+                  } @else {
+                    <span class="badge badge-invest"
+                          [title]="'Notificado em ' + (inv.notificadoEm | date:'dd/MM/yyyy HH:mm')">
+                      ✓ Disparado
+                    </span>
+                  }
+                </td>
+                <td style="white-space:nowrap">
+                  @if (!inv.ativo) {
+                    <button class="icon-btn"
+                            (click)="reativar(inv)"
+                            title="Reativar alerta">🔔</button>
+                  }
+                  <button class="icon-btn"
+                          (click)="remover(inv)"
+                          title="Remover">🗑</button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
+
+</div>

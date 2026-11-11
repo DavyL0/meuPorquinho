@@ -20,6 +20,7 @@ export class ShellComponent {
     { label: 'Novo lançamento', icon: '➕', route: '/lancamentos' },
     { label: 'Histórico', icon: '📋', route: '/historico' },
     { label: 'Relatórios', icon: '📈', route: '/relatorios' },
+    { label: 'Investimentos', icon: '🪙', route: '/investimentos' },
     { label: 'Perfil', icon: '👤', route: '/perfil' },
   ];
 

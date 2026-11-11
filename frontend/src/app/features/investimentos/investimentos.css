@@ -1,0 +1,18 @@
+.invest-form-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+@media (max-width: 1200px) {
+  .invest-form-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .invest-form-grid {
+    grid-template-columns: 1fr;
+  }
+}

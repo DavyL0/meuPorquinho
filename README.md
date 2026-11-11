@@ -86,6 +86,23 @@ sistema; o Docker Compose lê o `.env` automaticamente.
 | `DB_URL` / `DB_USERNAME` / `DB_PASSWORD` | Backend | Conexão com o Postgres (padrões apontam para o Docker local) |
 | `POSTGRES_DB` / `POSTGRES_USER` / `POSTGRES_PASSWORD` | Docker Compose | Credenciais do banco |
 | `PGADMIN_DEFAULT_EMAIL` / `PGADMIN_DEFAULT_PASSWORD` | Docker Compose | Login do pgAdmin |
+| `MAIL_HOST` / `MAIL_PORT` / `MAIL_USERNAME` / `MAIL_PASSWORD` / `MAIL_FROM` | Backend | SMTP para os alertas de investimento (sem `MAIL_HOST`, alertas só vão para o log) |
+| `MONITORAMENTO_INTERVALO`      | Backend         | Intervalo entre verificações de cotação em ms (padrão: `60000`) |
+
+## Alertas de investimento (Binance)
+
+O módulo de **Investimentos** permite cadastrar compras de cripto (pares BRL da
+Binance, ex: `BTCBRL`), definir um percentual de variação e a direção do alerta
+(alta, queda ou ambos). Um agendador no backend consulta a
+[API pública da Binance](https://developers.binance.com/docs/binance-spot-api-docs)
+a cada minuto e, quando a variação em relação ao preço pago atinge o
+percentual configurado, envia um e-mail para o endereço cadastrado na conta.
+
+- O alerta dispara **uma única vez**; é possível reativá-lo pela tela.
+- Sem SMTP configurado (`MAIL_HOST` vazio), os disparos aparecem apenas no log
+  do backend — útil para desenvolvimento.
+- Para Gmail, use `smtp.gmail.com:587` com uma
+  [senha de app](https://support.google.com/accounts/answer/185833).
 
 ## Endpoints da API
 
@@ -114,6 +131,15 @@ Base URL: `http://localhost:8080`
 | GET    | `/api/resumo/categorias`          | Gastos agrupados por categoria         |
 | GET    | `/api/resumo/evolucao?meses=6`    | Evolução mês a mês                     |
 | GET    | `/api/resumo/comparativo`         | Compara dois meses (`mesAtual`, `mesAnterior`) |
+
+### Investimentos (alertas de cripto)
+
+| Método | Rota                                  | Descrição                                     |
+|--------|---------------------------------------|-----------------------------------------------|
+| GET    | `/api/investimentos`                  | Lista com cotação atual e variação %          |
+| POST   | `/api/investimentos`                  | Cadastra investimento + alerta (`simbolo`, `quantidade`, `valorInicial`, `percentualAlerta`, `direcao`) |
+| PATCH  | `/api/investimentos/{id}/reativar`    | Rearma um alerta já disparado                 |
+| DELETE | `/api/investimentos/{id}`             | Remove investimento                           |
 
 ### Usuário
 
