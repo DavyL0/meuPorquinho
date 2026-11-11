@@ -19,6 +19,7 @@ e gerenciar o próprio perfil.
 meuPorquinho/
 ├── backend/porquinho/   # API REST Spring Boot
 ├── frontend/            # Aplicação Angular
+├── design/              # Redesign das telas (arquivo editável .kanva.pptd)
 ├── init/                # Scripts executados na 1ª inicialização do Postgres
 └── docker-compose.yml   # Postgres + pgAdmin
 ```
@@ -81,7 +82,8 @@ npm start
 ```
 
 Aplicação em <http://localhost:4200>. Crie uma conta pela tela de registro e
-faça login.
+faça login. Quando o token expira (padrão: 1h), o frontend faz logout e
+redireciona para a tela de login automaticamente.
 
 ## Variáveis de ambiente
 

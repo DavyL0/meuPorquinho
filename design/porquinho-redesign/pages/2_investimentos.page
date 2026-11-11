@@ -1,0 +1,699 @@
+pageType: content
+background:
+  type: solid
+  color: "$bg"
+elements:
+  # ================= Sidebar =================
+  - elementId: sidebar-bg
+    elementType: shape
+    bounds: [0, 0, 240, 900]
+    shapeName: rect
+    fill: {type: solid, color: "$sidebar"}
+  - elementId: sidebar-hairline
+    elementType: shape
+    bounds: [239, 0, 1, 900]
+    shapeName: rect
+    fill: {type: solid, color: "$border"}
+
+  - elementId: logo-icon
+    elementType: icon
+    bounds: [22, 26, 28, 28]
+    iconName: "fas:piggy-bank"
+    fill: {type: solid, color: "$accent"}
+  - elementId: logo-name
+    elementType: text
+    bounds: [60, 26, 150, 22]
+    content:
+      fontFamily: Inter
+      fontSize: 17
+      bold: true
+      color: "$text"
+      wrap: false
+      text: Porquinho
+  - elementId: logo-sub
+    elementType: text
+    bounds: [60, 48, 150, 13]
+    content:
+      style: "$muted"
+      wrap: false
+      text: Finanças pessoais
+
+  - elementId: nav-label-1
+    elementType: text
+    bounds: [24, 104, 160, 12]
+    content:
+      fontFamily: Inter
+      fontSize: 10
+      letterSpacing: 1.5
+      color: "$faint"
+      wrap: false
+      text: PRINCIPAL
+
+  - elementId: nav-icon-1
+    elementType: icon
+    bounds: [28, 134, 16, 16]
+    iconName: "fas:table-columns"
+    fill: {type: solid, color: "$muted"}
+  - elementId: nav-text-1
+    elementType: text
+    bounds: [56, 134, 160, 16]
+    content: {style: "$nav", wrap: false, text: Dashboard}
+  - elementId: nav-icon-2
+    elementType: icon
+    bounds: [28, 174, 16, 16]
+    iconName: "fas:circle-plus"
+    fill: {type: solid, color: "$muted"}
+  - elementId: nav-text-2
+    elementType: text
+    bounds: [56, 174, 160, 16]
+    content: {style: "$nav", wrap: false, text: Novo lançamento}
+  - elementId: nav-icon-3
+    elementType: icon
+    bounds: [28, 214, 16, 16]
+    iconName: "fas:clock-rotate-left"
+    fill: {type: solid, color: "$muted"}
+  - elementId: nav-text-3
+    elementType: text
+    bounds: [56, 214, 160, 16]
+    content: {style: "$nav", wrap: false, text: Histórico}
+  - elementId: nav-icon-4
+    elementType: icon
+    bounds: [28, 254, 16, 16]
+    iconName: "fas:chart-column"
+    fill: {type: solid, color: "$muted"}
+  - elementId: nav-text-4
+    elementType: text
+    bounds: [56, 254, 160, 16]
+    content: {style: "$nav", wrap: false, text: Relatórios}
+
+  # Nav item ativo — Investimentos
+  - elementId: nav-active-bg
+    elementType: shape
+    bounds: [12, 284, 216, 36]
+    shapeName: roundRect
+    adjustments: [22000]
+    fill: {type: solid, color: "$surfaceAlt"}
+  - elementId: nav-active-bar
+    elementType: shape
+    bounds: [12, 292, 3, 20]
+    shapeName: roundRect
+    adjustments: [50000]
+    fill: {type: solid, color: "$accent"}
+  - elementId: nav-icon-5
+    elementType: icon
+    bounds: [28, 294, 16, 16]
+    iconName: "fas:coins"
+    fill: {type: solid, color: "$accent"}
+  - elementId: nav-text-5
+    elementType: text
+    bounds: [56, 294, 160, 16]
+    content:
+      fontFamily: Inter
+      fontSize: 13
+      bold: true
+      color: "$text"
+      wrap: false
+      text: Investimentos
+
+  - elementId: nav-icon-6
+    elementType: icon
+    bounds: [28, 334, 16, 16]
+    iconName: "fas:user"
+    fill: {type: solid, color: "$muted"}
+  - elementId: nav-text-6
+    elementType: text
+    bounds: [56, 334, 160, 16]
+    content: {style: "$nav", wrap: false, text: Perfil}
+
+  - elementId: nav-label-2
+    elementType: text
+    bounds: [24, 382, 160, 12]
+    content:
+      fontFamily: Inter
+      fontSize: 10
+      letterSpacing: 1.5
+      color: "$faint"
+      wrap: false
+      text: CONTA
+  - elementId: nav-icon-7
+    elementType: icon
+    bounds: [28, 412, 16, 16]
+    iconName: "fas:right-from-bracket"
+    fill: {type: solid, color: "$muted"}
+  - elementId: nav-text-7
+    elementType: text
+    bounds: [56, 412, 160, 16]
+    content: {style: "$nav", wrap: false, text: Sair}
+
+  - elementId: sidebar-footer-line
+    elementType: shape
+    bounds: [16, 836, 208, 1]
+    shapeName: rect
+    fill: {type: solid, color: "$border"}
+  - elementId: user-avatar
+    elementType: shape
+    bounds: [20, 850, 32, 32]
+    shapeName: ellipse
+    fill: {type: solid, color: "#263241"}
+  - elementId: user-avatar-letter
+    elementType: text
+    bounds: [20, 850, 32, 32]
+    content:
+      fontFamily: Inter
+      fontSize: 13
+      bold: true
+      color: "$text"
+      align: [center, middle]
+      wrap: false
+      text: G
+  - elementId: user-name
+    elementType: text
+    bounds: [62, 852, 170, 15]
+    content:
+      fontFamily: Inter
+      fontSize: 13
+      color: "$text"
+      wrap: false
+      text: GZila Teste
+  - elementId: user-email
+    elementType: text
+    bounds: [62, 869, 170, 12]
+    content:
+      style: "$muted"
+      wrap: false
+      text: gzila3030@gmail.com
+
+  # ================= Header =================
+  - elementId: page-title
+    elementType: text
+    bounds: [264, 26, 500, 32]
+    content:
+      style: "$h1"
+      wrap: false
+      text: Investimentos
+  - elementId: page-sub
+    elementType: text
+    bounds: [264, 60, 640, 16]
+    content:
+      fontFamily: Inter
+      fontSize: 13
+      color: "$muted"
+      wrap: false
+      text: Alertas de cripto com cotação da Binance, notificados por e-mail.
+
+  # Botão secundário — Atualizar cotações
+  - elementId: refresh-bg
+    elementType: shape
+    bounds: [1212, 28, 196, 36]
+    shapeName: roundRect
+    adjustments: [22000]
+    fill: {type: solid, color: "$surface"}
+    border: {style: solid, width: 1, color: "$border"}
+  - elementId: refresh-icon
+    elementType: icon
+    bounds: [1228, 39, 13, 13]
+    iconName: "fas:rotate"
+    fill: {type: solid, color: "$body"}
+  - elementId: refresh-text
+    elementType: text
+    bounds: [1248, 38, 140, 16]
+    content:
+      fontFamily: Inter
+      fontSize: 13
+      color: "$body"
+      wrap: false
+      text: Atualizar cotações
+
+  # ================= Card formulário =================
+  - elementId: form-card
+    elementType: shape
+    bounds: [264, 108, 1144, 190]
+    shapeName: roundRect
+    adjustments: [6000]
+    fill: {type: solid, color: "$surface"}
+    border: {style: solid, width: 1, color: "$border"}
+  - elementId: form-title
+    elementType: text
+    bounds: [288, 126, 300, 18]
+    content:
+      style: "$cardTitle"
+      wrap: false
+      text: Cadastrar investimento
+
+  # Campo: Ativo
+  - elementId: f1-label
+    elementType: text
+    bounds: [288, 156, 200, 13]
+    content: {style: "$muted", wrap: false, text: Ativo (par Binance)}
+  - elementId: f1-input
+    elementType: shape
+    bounds: [288, 174, 200, 40]
+    shapeName: roundRect
+    adjustments: [14000]
+    fill: {type: solid, color: "$input"}
+    border: {style: solid, width: 1, color: "$border"}
+  - elementId: f1-text
+    elementType: text
+    bounds: [302, 186, 130, 16]
+    content: {fontFamily: Inter, fontSize: 13, color: "$body", wrap: false, text: BTCBRL}
+  - elementId: f1-icon
+    elementType: icon
+    bounds: [462, 188, 12, 12]
+    iconName: "fas:chevron-down"
+    fill: {type: solid, color: "$muted"}
+
+  # Campo: Quantidade
+  - elementId: f2-label
+    elementType: text
+    bounds: [504, 156, 140, 13]
+    content: {style: "$muted", wrap: false, text: Quantidade}
+  - elementId: f2-input
+    elementType: shape
+    bounds: [504, 174, 140, 40]
+    shapeName: roundRect
+    adjustments: [14000]
+    fill: {type: solid, color: "$input"}
+    border: {style: solid, width: 1, color: "$border"}
+  - elementId: f2-text
+    elementType: text
+    bounds: [518, 186, 110, 16]
+    content: {fontFamily: Inter, fontSize: 13, color: "$faint", wrap: false, text: "Ex: 0.05"}
+
+  # Campo: Preço pago
+  - elementId: f3-label
+    elementType: text
+    bounds: [660, 156, 180, 13]
+    content: {style: "$muted", wrap: false, text: "Preço pago (unitário, R$)"}
+  - elementId: f3-input
+    elementType: shape
+    bounds: [660, 174, 180, 40]
+    shapeName: roundRect
+    adjustments: [14000]
+    fill: {type: solid, color: "$input"}
+    border: {style: solid, width: 1, color: "$border"}
+  - elementId: f3-text
+    elementType: text
+    bounds: [674, 186, 150, 16]
+    content: {fontFamily: Inter, fontSize: 13, color: "$faint", wrap: false, text: "Ex: 350000"}
+
+  # Campo: Percentual
+  - elementId: f4-label
+    elementType: text
+    bounds: [856, 156, 150, 13]
+    content: {style: "$muted", wrap: false, text: "Alertar ao variar (%)"}
+  - elementId: f4-input
+    elementType: shape
+    bounds: [856, 174, 140, 40]
+    shapeName: roundRect
+    adjustments: [14000]
+    fill: {type: solid, color: "$input"}
+    border: {style: solid, width: 1, color: "$border"}
+  - elementId: f4-text
+    elementType: text
+    bounds: [870, 186, 110, 16]
+    content: {fontFamily: Inter, fontSize: 13, color: "$body", wrap: false, text: "10"}
+
+  # Campo: Direção
+  - elementId: f5-label
+    elementType: text
+    bounds: [1012, 156, 180, 13]
+    content: {style: "$muted", wrap: false, text: Direção do alerta}
+  - elementId: f5-input
+    elementType: shape
+    bounds: [1012, 174, 180, 40]
+    shapeName: roundRect
+    adjustments: [14000]
+    fill: {type: solid, color: "$input"}
+    border: {style: solid, width: 1, color: "$border"}
+  - elementId: f5-text
+    elementType: text
+    bounds: [1026, 186, 130, 16]
+    content: {fontFamily: Inter, fontSize: 13, color: "$body", wrap: false, text: Alta ou queda}
+  - elementId: f5-icon
+    elementType: icon
+    bounds: [1166, 188, 12, 12]
+    iconName: "fas:chevron-down"
+    fill: {type: solid, color: "$muted"}
+
+  # Botão criar alerta
+  - elementId: create-bg
+    elementType: shape
+    bounds: [1212, 174, 172, 40]
+    shapeName: roundRect
+    adjustments: [14000]
+    fill: {type: solid, color: "$accent"}
+  - elementId: create-icon
+    elementType: icon
+    bounds: [1232, 187, 14, 14]
+    iconName: "fas:bell"
+    fill: {type: solid, color: "$accentDark"}
+  - elementId: create-text
+    elementType: text
+    bounds: [1254, 186, 120, 16]
+    content:
+      fontFamily: Inter
+      fontSize: 13
+      bold: true
+      color: "$accentDark"
+      wrap: false
+      text: Criar alerta
+
+  # Texto auxiliar do formulário
+  - elementId: form-hint-icon
+    elementType: icon
+    bounds: [288, 244, 12, 12]
+    iconName: "fas:circle-info"
+    fill: {type: solid, color: "$faint"}
+  - elementId: form-hint
+    elementType: text
+    bounds: [306, 242, 760, 15]
+    content:
+      style: "$muted"
+      wrap: false
+      text: As cotações são verificadas a cada 60 segundos. Ao atingir o limite, o alerta dispara uma vez e pode ser reativado.
+
+  # ================= Tabela =================
+  - elementId: table-card
+    elementType: shape
+    bounds: [264, 318, 1144, 390]
+    shapeName: roundRect
+    adjustments: [2200]
+    fill: {type: solid, color: "$surface"}
+    border: {style: solid, width: 1, color: "$border"}
+
+  # Cabeçalho
+  - elementId: th1
+    elementType: text
+    bounds: [288, 334, 90, 14]
+    content: {fontFamily: Inter, fontSize: 10, letterSpacing: 1, color: "$faint", wrap: false, text: ATIVO}
+  - elementId: th2
+    elementType: text
+    bounds: [388, 334, 70, 14]
+    content: {fontFamily: Inter, fontSize: 10, letterSpacing: 1, color: "$faint", align: [right, top], wrap: false, text: QTD}
+  - elementId: th3
+    elementType: text
+    bounds: [470, 334, 110, 14]
+    content: {fontFamily: Inter, fontSize: 10, letterSpacing: 1, color: "$faint", align: [right, top], wrap: false, text: PREÇO PAGO}
+  - elementId: th4
+    elementType: text
+    bounds: [592, 334, 110, 14]
+    content: {fontFamily: Inter, fontSize: 10, letterSpacing: 1, color: "$faint", align: [right, top], wrap: false, text: COTAÇÃO ATUAL}
+  - elementId: th5
+    elementType: text
+    bounds: [714, 334, 80, 14]
+    content: {fontFamily: Inter, fontSize: 10, letterSpacing: 1, color: "$faint", align: [right, top], wrap: false, text: VARIAÇÃO}
+  - elementId: th6
+    elementType: text
+    bounds: [806, 334, 100, 14]
+    content: {fontFamily: Inter, fontSize: 10, letterSpacing: 1, color: "$faint", align: [right, top], wrap: false, text: VALOR ATUAL}
+  - elementId: th7
+    elementType: text
+    bounds: [918, 334, 150, 14]
+    content: {fontFamily: Inter, fontSize: 10, letterSpacing: 1, color: "$faint", wrap: false, text: ALERTA}
+  - elementId: th8
+    elementType: text
+    bounds: [1080, 334, 110, 14]
+    content: {fontFamily: Inter, fontSize: 10, letterSpacing: 1, color: "$faint", wrap: false, text: STATUS}
+  - elementId: th9
+    elementType: text
+    bounds: [1210, 334, 100, 14]
+    content: {fontFamily: Inter, fontSize: 10, letterSpacing: 1, color: "$faint", wrap: false, text: AÇÕES}
+  - elementId: table-head-line
+    elementType: shape
+    bounds: [264, 362, 1144, 1]
+    shapeName: rect
+    fill: {type: solid, color: "$border"}
+
+  # ---- Linha 1: BTCBRL (monitorando) ----
+  - elementId: r1-sym
+    elementType: text
+    bounds: [288, 383, 90, 16]
+    content: {fontFamily: Inter, fontSize: 13, bold: true, color: "$text", wrap: false, text: BTCBRL}
+  - elementId: r1-qtd
+    elementType: text
+    bounds: [388, 383, 70, 16]
+    content: {style: "$body", align: [right, top], wrap: false, text: "0,0200"}
+  - elementId: r1-preco
+    elementType: text
+    bounds: [470, 383, 110, 16]
+    content: {style: "$body", align: [right, top], wrap: false, text: "R$ 400.000,00"}
+  - elementId: r1-cot
+    elementType: text
+    bounds: [592, 383, 110, 16]
+    content: {style: "$body", align: [right, top], wrap: false, text: "R$ 415.494,00"}
+  - elementId: r1-var
+    elementType: text
+    bounds: [714, 383, 80, 16]
+    content: {fontFamily: Inter, fontSize: 13, bold: true, color: "$accent", align: [right, top], wrap: false, text: "+3,87%"}
+  - elementId: r1-val
+    elementType: text
+    bounds: [806, 383, 100, 16]
+    content: {fontFamily: Inter, fontSize: 13, bold: true, color: "$text", align: [right, top], wrap: false, text: "R$ 8.309,88"}
+  - elementId: r1-alert
+    elementType: text
+    bounds: [918, 383, 150, 16]
+    content: {style: "$muted", wrap: false, text: "Alta ou queda · 10%"}
+  - elementId: r1-badge
+    elementType: shape
+    bounds: [1080, 379, 94, 24]
+    shapeName: roundRect
+    adjustments: [50000]
+    fill: {type: solid, color: "#16301F"}
+  - elementId: r1-badge-text
+    elementType: text
+    bounds: [1080, 379, 94, 24]
+    content: {fontFamily: Inter, fontSize: 11, color: "$accent", align: [center, middle], wrap: false, text: Monitorando}
+  - elementId: r1-del
+    elementType: icon
+    bounds: [1214, 384, 14, 14]
+    iconName: "fas:trash"
+    fill: {type: solid, color: "$faint"}
+  - elementId: r1-line
+    elementType: shape
+    bounds: [288, 418, 1096, 1]
+    shapeName: rect
+    fill: {type: solid, color: "$border"}
+
+  # ---- Linha 2: ETHBRL (monitorando) ----
+  - elementId: r2-sym
+    elementType: text
+    bounds: [288, 439, 90, 16]
+    content: {fontFamily: Inter, fontSize: 13, bold: true, color: "$text", wrap: false, text: ETHBRL}
+  - elementId: r2-qtd
+    elementType: text
+    bounds: [388, 439, 70, 16]
+    content: {style: "$body", align: [right, top], wrap: false, text: "0,5000"}
+  - elementId: r2-preco
+    elementType: text
+    bounds: [470, 439, 110, 16]
+    content: {style: "$body", align: [right, top], wrap: false, text: "R$ 19.240,00"}
+  - elementId: r2-cot
+    elementType: text
+    bounds: [592, 439, 110, 16]
+    content: {style: "$body", align: [right, top], wrap: false, text: "R$ 18.730,00"}
+  - elementId: r2-var
+    elementType: text
+    bounds: [714, 439, 80, 16]
+    content: {fontFamily: Inter, fontSize: 13, bold: true, color: "$red", align: [right, top], wrap: false, text: "-2,65%"}
+  - elementId: r2-val
+    elementType: text
+    bounds: [806, 439, 100, 16]
+    content: {fontFamily: Inter, fontSize: 13, bold: true, color: "$text", align: [right, top], wrap: false, text: "R$ 9.365,00"}
+  - elementId: r2-alert
+    elementType: text
+    bounds: [918, 439, 150, 16]
+    content: {style: "$muted", wrap: false, text: "Somente queda · 5%"}
+  - elementId: r2-badge
+    elementType: shape
+    bounds: [1080, 435, 94, 24]
+    shapeName: roundRect
+    adjustments: [50000]
+    fill: {type: solid, color: "#16301F"}
+  - elementId: r2-badge-text
+    elementType: text
+    bounds: [1080, 435, 94, 24]
+    content: {fontFamily: Inter, fontSize: 11, color: "$accent", align: [center, middle], wrap: false, text: Monitorando}
+  - elementId: r2-del
+    elementType: icon
+    bounds: [1214, 440, 14, 14]
+    iconName: "fas:trash"
+    fill: {type: solid, color: "$faint"}
+  - elementId: r2-line
+    elementType: shape
+    bounds: [288, 474, 1096, 1]
+    shapeName: rect
+    fill: {type: solid, color: "$border"}
+
+  # ---- Linha 3: SOLBRL (disparado) ----
+  - elementId: r3-sym
+    elementType: text
+    bounds: [288, 495, 90, 16]
+    content: {fontFamily: Inter, fontSize: 13, bold: true, color: "$text", wrap: false, text: SOLBRL}
+  - elementId: r3-qtd
+    elementType: text
+    bounds: [388, 495, 70, 16]
+    content: {style: "$body", align: [right, top], wrap: false, text: "2,0000"}
+  - elementId: r3-preco
+    elementType: text
+    bounds: [470, 495, 110, 16]
+    content: {style: "$body", align: [right, top], wrap: false, text: "R$ 812,00"}
+  - elementId: r3-cot
+    elementType: text
+    bounds: [592, 495, 110, 16]
+    content: {style: "$body", align: [right, top], wrap: false, text: "R$ 901,20"}
+  - elementId: r3-var
+    elementType: text
+    bounds: [714, 495, 80, 16]
+    content: {fontFamily: Inter, fontSize: 13, bold: true, color: "$accent", align: [right, top], wrap: false, text: "+10,99%"}
+  - elementId: r3-val
+    elementType: text
+    bounds: [806, 495, 100, 16]
+    content: {fontFamily: Inter, fontSize: 13, bold: true, color: "$text", align: [right, top], wrap: false, text: "R$ 1.802,40"}
+  - elementId: r3-alert
+    elementType: text
+    bounds: [918, 495, 150, 16]
+    content: {style: "$muted", wrap: false, text: "Alta ou queda · 10%"}
+  - elementId: r3-badge
+    elementType: shape
+    bounds: [1080, 491, 82, 24]
+    shapeName: roundRect
+    adjustments: [50000]
+    fill: {type: solid, color: "#33290F"}
+  - elementId: r3-badge-text
+    elementType: text
+    bounds: [1080, 491, 82, 24]
+    content: {fontFamily: Inter, fontSize: 11, color: "$amber", align: [center, middle], wrap: false, text: Disparado}
+  - elementId: r3-reativar
+    elementType: icon
+    bounds: [1188, 496, 14, 14]
+    iconName: "fas:bell"
+    fill: {type: solid, color: "$amber"}
+  - elementId: r3-del
+    elementType: icon
+    bounds: [1214, 496, 14, 14]
+    iconName: "fas:trash"
+    fill: {type: solid, color: "$faint"}
+  - elementId: r3-line
+    elementType: shape
+    bounds: [288, 530, 1096, 1]
+    shapeName: rect
+    fill: {type: solid, color: "$border"}
+
+  # ---- Linha 4: USDTBRL (monitorando) ----
+  - elementId: r4-sym
+    elementType: text
+    bounds: [288, 551, 90, 16]
+    content: {fontFamily: Inter, fontSize: 13, bold: true, color: "$text", wrap: false, text: USDTBRL}
+  - elementId: r4-qtd
+    elementType: text
+    bounds: [388, 551, 70, 16]
+    content: {style: "$body", align: [right, top], wrap: false, text: "150,00"}
+  - elementId: r4-preco
+    elementType: text
+    bounds: [470, 551, 110, 16]
+    content: {style: "$body", align: [right, top], wrap: false, text: "R$ 5,32"}
+  - elementId: r4-cot
+    elementType: text
+    bounds: [592, 551, 110, 16]
+    content: {style: "$body", align: [right, top], wrap: false, text: "R$ 5,41"}
+  - elementId: r4-var
+    elementType: text
+    bounds: [714, 551, 80, 16]
+    content: {fontFamily: Inter, fontSize: 13, bold: true, color: "$accent", align: [right, top], wrap: false, text: "+1,69%"}
+  - elementId: r4-val
+    elementType: text
+    bounds: [806, 551, 100, 16]
+    content: {fontFamily: Inter, fontSize: 13, bold: true, color: "$text", align: [right, top], wrap: false, text: "R$ 811,50"}
+  - elementId: r4-alert
+    elementType: text
+    bounds: [918, 551, 150, 16]
+    content: {style: "$muted", wrap: false, text: "Somente alta · 3%"}
+  - elementId: r4-badge
+    elementType: shape
+    bounds: [1080, 547, 94, 24]
+    shapeName: roundRect
+    adjustments: [50000]
+    fill: {type: solid, color: "#16301F"}
+  - elementId: r4-badge-text
+    elementType: text
+    bounds: [1080, 547, 94, 24]
+    content: {fontFamily: Inter, fontSize: 11, color: "$accent", align: [center, middle], wrap: false, text: Monitorando}
+  - elementId: r4-del
+    elementType: icon
+    bounds: [1214, 552, 14, 14]
+    iconName: "fas:trash"
+    fill: {type: solid, color: "$faint"}
+  - elementId: r4-line
+    elementType: shape
+    bounds: [288, 586, 1096, 1]
+    shapeName: rect
+    fill: {type: solid, color: "$border"}
+
+  # ---- Linha 5: XRPBRL (disparado) ----
+  - elementId: r5-sym
+    elementType: text
+    bounds: [288, 607, 90, 16]
+    content: {fontFamily: Inter, fontSize: 13, bold: true, color: "$text", wrap: false, text: XRPBRL}
+  - elementId: r5-qtd
+    elementType: text
+    bounds: [388, 607, 70, 16]
+    content: {style: "$body", align: [right, top], wrap: false, text: "800,00"}
+  - elementId: r5-preco
+    elementType: text
+    bounds: [470, 607, 110, 16]
+    content: {style: "$body", align: [right, top], wrap: false, text: "R$ 12,10"}
+  - elementId: r5-cot
+    elementType: text
+    bounds: [592, 607, 110, 16]
+    content: {style: "$body", align: [right, top], wrap: false, text: "R$ 11,56"}
+  - elementId: r5-var
+    elementType: text
+    bounds: [714, 607, 80, 16]
+    content: {fontFamily: Inter, fontSize: 13, bold: true, color: "$red", align: [right, top], wrap: false, text: "-4,46%"}
+  - elementId: r5-val
+    elementType: text
+    bounds: [806, 607, 100, 16]
+    content: {fontFamily: Inter, fontSize: 13, bold: true, color: "$text", align: [right, top], wrap: false, text: "R$ 9.248,00"}
+  - elementId: r5-alert
+    elementType: text
+    bounds: [918, 607, 150, 16]
+    content: {style: "$muted", wrap: false, text: "Alta ou queda · 8%"}
+  - elementId: r5-badge
+    elementType: shape
+    bounds: [1080, 603, 82, 24]
+    shapeName: roundRect
+    adjustments: [50000]
+    fill: {type: solid, color: "#33290F"}
+  - elementId: r5-badge-text
+    elementType: text
+    bounds: [1080, 603, 82, 24]
+    content: {fontFamily: Inter, fontSize: 11, color: "$amber", align: [center, middle], wrap: false, text: Disparado}
+  - elementId: r5-reativar
+    elementType: icon
+    bounds: [1188, 608, 14, 14]
+    iconName: "fas:bell"
+    fill: {type: solid, color: "$amber"}
+  - elementId: r5-del
+    elementType: icon
+    bounds: [1214, 608, 14, 14]
+    iconName: "fas:trash"
+    fill: {type: solid, color: "$faint"}
+
+  # Rodapé da tabela — e-mail de notificação
+  - elementId: table-footer-line
+    elementType: shape
+    bounds: [264, 642, 1144, 1]
+    shapeName: rect
+    fill: {type: solid, color: "$border"}
+  - elementId: mail-icon
+    elementType: icon
+    bounds: [288, 662, 14, 14]
+    iconName: "fas:envelope"
+    fill: {type: solid, color: "$faint"}
+  - elementId: mail-text
+    elementType: text
+    bounds: [310, 661, 700, 16]
+    content:
+      style: "$muted"
+      wrap: false
+      text: "Notificações enviadas para gzila3030@gmail.com — disparo registrado às 16:35 de hoje."

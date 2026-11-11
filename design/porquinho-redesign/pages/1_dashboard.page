@@ -1,0 +1,880 @@
+pageType: content
+background:
+  type: solid
+  color: "$bg"
+elements:
+  # ================= Sidebar =================
+  - elementId: sidebar-bg
+    elementType: shape
+    bounds: [0, 0, 240, 900]
+    shapeName: rect
+    fill: {type: solid, color: "$sidebar"}
+  - elementId: sidebar-hairline
+    elementType: shape
+    bounds: [239, 0, 1, 900]
+    shapeName: rect
+    fill: {type: solid, color: "$border"}
+
+  # Logo
+  - elementId: logo-icon
+    elementType: icon
+    bounds: [22, 26, 28, 28]
+    iconName: "fas:piggy-bank"
+    fill: {type: solid, color: "$accent"}
+  - elementId: logo-name
+    elementType: text
+    bounds: [60, 26, 150, 22]
+    content:
+      fontFamily: Inter
+      fontSize: 17
+      bold: true
+      color: "$text"
+      wrap: false
+      text: Porquinho
+  - elementId: logo-sub
+    elementType: text
+    bounds: [60, 48, 150, 13]
+    content:
+      style: "$muted"
+      wrap: false
+      text: Finanças pessoais
+
+  - elementId: nav-label-1
+    elementType: text
+    bounds: [24, 104, 160, 12]
+    content:
+      fontFamily: Inter
+      fontSize: 10
+      letterSpacing: 1.5
+      color: "$faint"
+      wrap: false
+      text: PRINCIPAL
+
+  # Nav item ativo — Dashboard
+  - elementId: nav-active-bg
+    elementType: shape
+    bounds: [12, 124, 216, 36]
+    shapeName: roundRect
+    adjustments: [22000]
+    fill: {type: solid, color: "$surfaceAlt"}
+  - elementId: nav-active-bar
+    elementType: shape
+    bounds: [12, 132, 3, 20]
+    shapeName: roundRect
+    adjustments: [50000]
+    fill: {type: solid, color: "$accent"}
+  - elementId: nav-icon-1
+    elementType: icon
+    bounds: [28, 134, 16, 16]
+    iconName: "fas:table-columns"
+    fill: {type: solid, color: "$accent"}
+  - elementId: nav-text-1
+    elementType: text
+    bounds: [56, 134, 160, 16]
+    content:
+      fontFamily: Inter
+      fontSize: 13
+      bold: true
+      color: "$text"
+      wrap: false
+      text: Dashboard
+
+  # Nav item — Novo lançamento
+  - elementId: nav-icon-2
+    elementType: icon
+    bounds: [28, 174, 16, 16]
+    iconName: "fas:circle-plus"
+    fill: {type: solid, color: "$muted"}
+  - elementId: nav-text-2
+    elementType: text
+    bounds: [56, 174, 160, 16]
+    content:
+      style: "$nav"
+      wrap: false
+      text: Novo lançamento
+
+  # Nav item — Histórico
+  - elementId: nav-icon-3
+    elementType: icon
+    bounds: [28, 214, 16, 16]
+    iconName: "fas:clock-rotate-left"
+    fill: {type: solid, color: "$muted"}
+  - elementId: nav-text-3
+    elementType: text
+    bounds: [56, 214, 160, 16]
+    content:
+      style: "$nav"
+      wrap: false
+      text: Histórico
+
+  # Nav item — Relatórios
+  - elementId: nav-icon-4
+    elementType: icon
+    bounds: [28, 254, 16, 16]
+    iconName: "fas:chart-column"
+    fill: {type: solid, color: "$muted"}
+  - elementId: nav-text-4
+    elementType: text
+    bounds: [56, 254, 160, 16]
+    content:
+      style: "$nav"
+      wrap: false
+      text: Relatórios
+
+  # Nav item — Investimentos
+  - elementId: nav-icon-5
+    elementType: icon
+    bounds: [28, 294, 16, 16]
+    iconName: "fas:coins"
+    fill: {type: solid, color: "$muted"}
+  - elementId: nav-text-5
+    elementType: text
+    bounds: [56, 294, 160, 16]
+    content:
+      style: "$nav"
+      wrap: false
+      text: Investimentos
+
+  # Nav item — Perfil
+  - elementId: nav-icon-6
+    elementType: icon
+    bounds: [28, 334, 16, 16]
+    iconName: "fas:user"
+    fill: {type: solid, color: "$muted"}
+  - elementId: nav-text-6
+    elementType: text
+    bounds: [56, 334, 160, 16]
+    content:
+      style: "$nav"
+      wrap: false
+      text: Perfil
+
+  - elementId: nav-label-2
+    elementType: text
+    bounds: [24, 382, 160, 12]
+    content:
+      fontFamily: Inter
+      fontSize: 10
+      letterSpacing: 1.5
+      color: "$faint"
+      wrap: false
+      text: CONTA
+  - elementId: nav-icon-7
+    elementType: icon
+    bounds: [28, 412, 16, 16]
+    iconName: "fas:right-from-bracket"
+    fill: {type: solid, color: "$muted"}
+  - elementId: nav-text-7
+    elementType: text
+    bounds: [56, 412, 160, 16]
+    content:
+      style: "$nav"
+      wrap: false
+      text: Sair
+
+  # Rodapé sidebar — usuário
+  - elementId: sidebar-footer-line
+    elementType: shape
+    bounds: [16, 836, 208, 1]
+    shapeName: rect
+    fill: {type: solid, color: "$border"}
+  - elementId: user-avatar
+    elementType: shape
+    bounds: [20, 850, 32, 32]
+    shapeName: ellipse
+    fill: {type: solid, color: "#263241"}
+  - elementId: user-avatar-letter
+    elementType: text
+    bounds: [20, 850, 32, 32]
+    content:
+      fontFamily: Inter
+      fontSize: 13
+      bold: true
+      color: "$text"
+      align: [center, middle]
+      wrap: false
+      text: G
+  - elementId: user-name
+    elementType: text
+    bounds: [62, 852, 170, 15]
+    content:
+      fontFamily: Inter
+      fontSize: 13
+      color: "$text"
+      wrap: false
+      text: GZila Teste
+  - elementId: user-email
+    elementType: text
+    bounds: [62, 869, 170, 12]
+    content:
+      style: "$muted"
+      wrap: false
+      text: gzila3030@gmail.com
+
+  # ================= Header =================
+  - elementId: page-title
+    elementType: text
+    bounds: [264, 26, 500, 32]
+    content:
+      style: "$h1"
+      wrap: false
+      text: Dashboard
+  - elementId: page-sub
+    elementType: text
+    bounds: [264, 60, 600, 16]
+    content:
+      fontFamily: Inter
+      fontSize: 13
+      color: "$muted"
+      wrap: false
+      text: Bem-vindo de volta, GZila — visão geral de novembro.
+
+  # Seletor de mês
+  - elementId: month-select
+    elementType: shape
+    bounds: [1080, 28, 196, 36]
+    shapeName: roundRect
+    adjustments: [22000]
+    fill: {type: solid, color: "$surface"}
+    border: {style: solid, width: 1, color: "$border"}
+  - elementId: month-select-text
+    elementType: text
+    bounds: [1096, 38, 148, 16]
+    content:
+      fontFamily: Inter
+      fontSize: 13
+      color: "$body"
+      wrap: false
+      text: Novembro de 2026
+  - elementId: month-select-icon
+    elementType: icon
+    bounds: [1252, 40, 12, 12]
+    iconName: "fas:chevron-down"
+    fill: {type: solid, color: "$muted"}
+
+  # Botão primário
+  - elementId: cta-bg
+    elementType: shape
+    bounds: [1288, 28, 120, 36]
+    shapeName: roundRect
+    adjustments: [22000]
+    fill: {type: solid, color: "$accent"}
+  - elementId: cta-icon
+    elementType: icon
+    bounds: [1302, 39, 13, 13]
+    iconName: "fas:plus"
+    fill: {type: solid, color: "$accentDark"}
+  - elementId: cta-text
+    elementType: text
+    bounds: [1321, 38, 80, 16]
+    content:
+      fontFamily: Inter
+      fontSize: 13
+      bold: true
+      color: "$accentDark"
+      wrap: false
+      text: Lançamento
+
+  # ================= KPI 1 — Entradas =================
+  - elementId: kpi1-card
+    elementType: shape
+    bounds: [264, 112, 271, 96]
+    shapeName: roundRect
+    adjustments: [10000]
+    fill: {type: solid, color: "$surface"}
+    border: {style: solid, width: 1, color: "$border"}
+  - elementId: kpi1-chip
+    elementType: shape
+    bounds: [280, 128, 32, 32]
+    shapeName: roundRect
+    adjustments: [22000]
+    fill: {type: solid, color: "#16301F"}
+  - elementId: kpi1-icon
+    elementType: icon
+    bounds: [288, 136, 16, 16]
+    iconName: "fas:arrow-trend-up"
+    fill: {type: solid, color: "$accent"}
+  - elementId: kpi1-label
+    elementType: text
+    bounds: [320, 130, 140, 14]
+    content:
+      style: "$muted"
+      wrap: false
+      text: Entradas
+  - elementId: kpi1-delta
+    elementType: text
+    bounds: [320, 146, 160, 12]
+    content:
+      fontFamily: Inter
+      fontSize: 10
+      color: "$accent"
+      wrap: false
+      text: "+8,2% vs outubro"
+  - elementId: kpi1-value
+    elementType: text
+    bounds: [280, 168, 239, 28]
+    content:
+      style: "$kpi"
+      wrap: false
+      text: "R$ 7.850,00"
+
+  # ================= KPI 2 — Gastos =================
+  - elementId: kpi2-card
+    elementType: shape
+    bounds: [555, 112, 271, 96]
+    shapeName: roundRect
+    adjustments: [10000]
+    fill: {type: solid, color: "$surface"}
+    border: {style: solid, width: 1, color: "$border"}
+  - elementId: kpi2-chip
+    elementType: shape
+    bounds: [571, 128, 32, 32]
+    shapeName: roundRect
+    adjustments: [22000]
+    fill: {type: solid, color: "#2E1B1B"}
+  - elementId: kpi2-icon
+    elementType: icon
+    bounds: [579, 136, 16, 16]
+    iconName: "fas:arrow-trend-down"
+    fill: {type: solid, color: "$red"}
+  - elementId: kpi2-label
+    elementType: text
+    bounds: [611, 130, 140, 14]
+    content:
+      style: "$muted"
+      wrap: false
+      text: Gastos
+  - elementId: kpi2-delta
+    elementType: text
+    bounds: [611, 146, 160, 12]
+    content:
+      fontFamily: Inter
+      fontSize: 10
+      color: "$red"
+      wrap: false
+      text: "+3,1% vs outubro"
+  - elementId: kpi2-value
+    elementType: text
+    bounds: [571, 168, 239, 28]
+    content:
+      style: "$kpi"
+      wrap: false
+      text: "R$ 4.213,40"
+
+  # ================= KPI 3 — Investimentos =================
+  - elementId: kpi3-card
+    elementType: shape
+    bounds: [846, 112, 271, 96]
+    shapeName: roundRect
+    adjustments: [10000]
+    fill: {type: solid, color: "$surface"}
+    border: {style: solid, width: 1, color: "$border"}
+  - elementId: kpi3-chip
+    elementType: shape
+    bounds: [862, 128, 32, 32]
+    shapeName: roundRect
+    adjustments: [22000]
+    fill: {type: solid, color: "#251E38"}
+  - elementId: kpi3-icon
+    elementType: icon
+    bounds: [870, 136, 16, 16]
+    iconName: "fas:coins"
+    fill: {type: solid, color: "$purple"}
+  - elementId: kpi3-label
+    elementType: text
+    bounds: [902, 130, 140, 14]
+    content:
+      style: "$muted"
+      wrap: false
+      text: Investimentos
+  - elementId: kpi3-delta
+    elementType: text
+    bounds: [902, 146, 160, 12]
+    content:
+      fontFamily: Inter
+      fontSize: 10
+      color: "$purple"
+      wrap: false
+      text: "+R$ 300 no mês"
+  - elementId: kpi3-value
+    elementType: text
+    bounds: [862, 168, 239, 28]
+    content:
+      style: "$kpi"
+      wrap: false
+      text: "R$ 1.500,00"
+
+  # ================= KPI 4 — Saldo livre =================
+  - elementId: kpi4-card
+    elementType: shape
+    bounds: [1137, 112, 271, 96]
+    shapeName: roundRect
+    adjustments: [10000]
+    fill: {type: solid, color: "$surface"}
+    border: {style: solid, width: 1, color: "$border"}
+  - elementId: kpi4-chip
+    elementType: shape
+    bounds: [1153, 128, 32, 32]
+    shapeName: roundRect
+    adjustments: [22000]
+    fill: {type: solid, color: "#1B2637"}
+  - elementId: kpi4-icon
+    elementType: icon
+    bounds: [1161, 136, 16, 16]
+    iconName: "fas:wallet"
+    fill: {type: solid, color: "$blue"}
+  - elementId: kpi4-label
+    elementType: text
+    bounds: [1193, 130, 140, 14]
+    content:
+      style: "$muted"
+      wrap: false
+      text: Saldo livre
+  - elementId: kpi4-delta
+    elementType: text
+    bounds: [1193, 146, 160, 12]
+    content:
+      fontFamily: Inter
+      fontSize: 10
+      color: "$blue"
+      wrap: false
+      text: "margem de 27%"
+  - elementId: kpi4-value
+    elementType: text
+    bounds: [1153, 168, 239, 28]
+    content:
+      style: "$kpi"
+      wrap: false
+      text: "R$ 2.136,60"
+
+  # ================= Evolução mensal =================
+  - elementId: evo-card
+    elementType: shape
+    bounds: [264, 228, 752, 300]
+    shapeName: roundRect
+    adjustments: [4000]
+    fill: {type: solid, color: "$surface"}
+    border: {style: solid, width: 1, color: "$border"}
+  - elementId: evo-title
+    elementType: text
+    bounds: [288, 246, 300, 18]
+    content:
+      style: "$cardTitle"
+      wrap: false
+      text: Evolução mensal
+  - elementId: evo-sub
+    elementType: text
+    bounds: [288, 266, 300, 14]
+    content:
+      style: "$muted"
+      wrap: false
+      text: Últimos 6 meses
+  - elementId: evo-chart
+    elementType: chart
+    bounds: [280, 288, 720, 224]
+    fontFamily: Inter
+    legend: {position: top, color: "$muted", fontSize: 11}
+    data:
+      cols: [mes, Entradas, Gastos, Investimentos]
+      rows:
+        - [jun, 7200, 4100, 800]
+        - [jul, 7450, 4350, 1000]
+        - [ago, 7800, 3980, 1200]
+        - [set, 7300, 4520, 1200]
+        - [out, 7850, 4090, 1500]
+        - [nov, 7850, 4213, 1500]
+    seriesDefaults:
+      bar: {}
+    series:
+      - type: bar
+        encode: {x: mes, y: Entradas}
+        name: Entradas
+        fill: "$accent"
+      - type: bar
+        encode: {x: mes, y: Gastos}
+        name: Gastos
+        fill: "$red"
+      - type: bar
+        encode: {x: mes, y: Investimentos}
+        name: Investimentos
+        fill: "$purple"
+    xAxis:
+      label: {color: "$muted", fontSize: 10}
+      axisLine: {color: "$border"}
+      gridLine: false
+    yAxis:
+      label: {color: "$muted", fontSize: 10, numberFormat: "#,##0"}
+      gridLine: {color: "$border", style: solid, width: 1}
+
+  # ================= Gastos por categoria =================
+  - elementId: donut-card
+    elementType: shape
+    bounds: [1036, 228, 372, 300]
+    shapeName: roundRect
+    adjustments: [4000]
+    fill: {type: solid, color: "$surface"}
+    border: {style: solid, width: 1, color: "$border"}
+  - elementId: donut-title
+    elementType: text
+    bounds: [1060, 246, 300, 18]
+    content:
+      style: "$cardTitle"
+      wrap: false
+      text: Gastos por categoria
+  - elementId: donut-sub
+    elementType: text
+    bounds: [1060, 266, 300, 14]
+    content:
+      style: "$muted"
+      wrap: false
+      text: Novembro 2026
+  - elementId: donut-chart
+    elementType: chart
+    bounds: [1052, 296, 150, 200]
+    fontFamily: Inter
+    legend: false
+    data:
+      cols: [categoria, total]
+      rows:
+        - [Alimentação, 1412]
+        - [Moradia, 1200]
+        - [Transporte, 640]
+        - [Lazer, 480]
+        - [Saúde, 481]
+    series:
+      - type: pie
+        encode: {category: categoria, value: total}
+        innerRadius: 0.7
+        fill: ["$blue", "$accent", "$amber", "$purple", "$red"]
+
+  # Legenda donut
+  - elementId: leg1-dot
+    elementType: shape
+    bounds: [1218, 306, 8, 8]
+    shapeName: ellipse
+    fill: {type: solid, color: "$blue"}
+  - elementId: leg1-name
+    elementType: text
+    bounds: [1234, 302, 100, 14]
+    content: {fontFamily: Inter, fontSize: 12, color: "$body", wrap: false, text: Alimentação}
+  - elementId: leg1-val
+    elementType: text
+    bounds: [1304, 302, 88, 14]
+    content: {fontFamily: Inter, fontSize: 12, bold: true, color: "$text", align: [right, top], wrap: false, text: "R$ 1.412"}
+  - elementId: leg2-dot
+    elementType: shape
+    bounds: [1218, 340, 8, 8]
+    shapeName: ellipse
+    fill: {type: solid, color: "$accent"}
+  - elementId: leg2-name
+    elementType: text
+    bounds: [1234, 336, 100, 14]
+    content: {fontFamily: Inter, fontSize: 12, color: "$body", wrap: false, text: Moradia}
+  - elementId: leg2-val
+    elementType: text
+    bounds: [1304, 336, 88, 14]
+    content: {fontFamily: Inter, fontSize: 12, bold: true, color: "$text", align: [right, top], wrap: false, text: "R$ 1.200"}
+  - elementId: leg3-dot
+    elementType: shape
+    bounds: [1218, 374, 8, 8]
+    shapeName: ellipse
+    fill: {type: solid, color: "$amber"}
+  - elementId: leg3-name
+    elementType: text
+    bounds: [1234, 370, 100, 14]
+    content: {fontFamily: Inter, fontSize: 12, color: "$body", wrap: false, text: Transporte}
+  - elementId: leg3-val
+    elementType: text
+    bounds: [1304, 370, 88, 14]
+    content: {fontFamily: Inter, fontSize: 12, bold: true, color: "$text", align: [right, top], wrap: false, text: "R$ 640"}
+  - elementId: leg4-dot
+    elementType: shape
+    bounds: [1218, 408, 8, 8]
+    shapeName: ellipse
+    fill: {type: solid, color: "$purple"}
+  - elementId: leg4-name
+    elementType: text
+    bounds: [1234, 404, 100, 14]
+    content: {fontFamily: Inter, fontSize: 12, color: "$body", wrap: false, text: Lazer}
+  - elementId: leg4-val
+    elementType: text
+    bounds: [1304, 404, 88, 14]
+    content: {fontFamily: Inter, fontSize: 12, bold: true, color: "$text", align: [right, top], wrap: false, text: "R$ 480"}
+  - elementId: leg5-dot
+    elementType: shape
+    bounds: [1218, 442, 8, 8]
+    shapeName: ellipse
+    fill: {type: solid, color: "$red"}
+  - elementId: leg5-name
+    elementType: text
+    bounds: [1234, 438, 100, 14]
+    content: {fontFamily: Inter, fontSize: 12, color: "$body", wrap: false, text: Saúde}
+  - elementId: leg5-val
+    elementType: text
+    bounds: [1304, 438, 88, 14]
+    content: {fontFamily: Inter, fontSize: 12, bold: true, color: "$text", align: [right, top], wrap: false, text: "R$ 481"}
+
+  # ================= Últimos lançamentos =================
+  - elementId: recent-card
+    elementType: shape
+    bounds: [264, 548, 752, 280]
+    shapeName: roundRect
+    adjustments: [4000]
+    fill: {type: solid, color: "$surface"}
+    border: {style: solid, width: 1, color: "$border"}
+  - elementId: recent-title
+    elementType: text
+    bounds: [288, 566, 300, 18]
+    content:
+      style: "$cardTitle"
+      wrap: false
+      text: Últimos lançamentos
+  - elementId: recent-link
+    elementType: text
+    bounds: [876, 568, 116, 16]
+    content:
+      fontFamily: Inter
+      fontSize: 12
+      color: "$blue"
+      align: [right, top]
+      wrap: false
+      text: Ver todos
+
+  # Linha 1 — Supermercado
+  - elementId: rec1-chip
+    elementType: shape
+    bounds: [288, 608, 32, 32]
+    shapeName: roundRect
+    adjustments: [22000]
+    fill: {type: solid, color: "#1E2A3D"}
+  - elementId: rec1-icon
+    elementType: icon
+    bounds: [297, 617, 14, 14]
+    iconName: "fas:cart-shopping"
+    fill: {type: solid, color: "$blue"}
+  - elementId: rec1-desc
+    elementType: text
+    bounds: [332, 606, 320, 16]
+    content: {style: "$body", wrap: false, text: Supermercado Pão de Açúcar}
+  - elementId: rec1-meta
+    elementType: text
+    bounds: [332, 624, 320, 12]
+    content: {style: "$muted", wrap: false, text: "Alimentação · hoje"}
+  - elementId: rec1-val
+    elementType: text
+    bounds: [700, 614, 292, 18]
+    content: {fontFamily: Inter, fontSize: 13, bold: true, color: "$red", align: [right, top], wrap: false, text: "- R$ 342,80"}
+
+  - elementId: rec-line-1
+    elementType: shape
+    bounds: [288, 656, 704, 1]
+    shapeName: rect
+    fill: {type: solid, color: "$border"}
+
+  # Linha 2 — Salário
+  - elementId: rec2-chip
+    elementType: shape
+    bounds: [288, 668, 32, 32]
+    shapeName: roundRect
+    adjustments: [22000]
+    fill: {type: solid, color: "#1D2E26"}
+  - elementId: rec2-icon
+    elementType: icon
+    bounds: [297, 677, 14, 14]
+    iconName: "fas:briefcase"
+    fill: {type: solid, color: "$accent"}
+  - elementId: rec2-desc
+    elementType: text
+    bounds: [332, 666, 320, 16]
+    content: {style: "$body", wrap: false, text: Salário mensal}
+  - elementId: rec2-meta
+    elementType: text
+    bounds: [332, 684, 320, 12]
+    content: {style: "$muted", wrap: false, text: "Receita · 05/11"}
+  - elementId: rec2-val
+    elementType: text
+    bounds: [700, 674, 292, 18]
+    content: {fontFamily: Inter, fontSize: 13, bold: true, color: "$accent", align: [right, top], wrap: false, text: "+ R$ 7.850,00"}
+
+  - elementId: rec-line-2
+    elementType: shape
+    bounds: [288, 716, 704, 1]
+    shapeName: rect
+    fill: {type: solid, color: "$border"}
+
+  # Linha 3 — Uber
+  - elementId: rec3-chip
+    elementType: shape
+    bounds: [288, 728, 32, 32]
+    shapeName: roundRect
+    adjustments: [22000]
+    fill: {type: solid, color: "#2E2A1D"}
+  - elementId: rec3-icon
+    elementType: icon
+    bounds: [297, 737, 14, 14]
+    iconName: "fas:car"
+    fill: {type: solid, color: "$amber"}
+  - elementId: rec3-desc
+    elementType: text
+    bounds: [332, 726, 320, 16]
+    content: {style: "$body", wrap: false, text: Uber — centro}
+  - elementId: rec3-meta
+    elementType: text
+    bounds: [332, 744, 320, 12]
+    content: {style: "$muted", wrap: false, text: "Transporte · 09/11"}
+  - elementId: rec3-val
+    elementType: text
+    bounds: [700, 734, 292, 18]
+    content: {fontFamily: Inter, fontSize: 13, bold: true, color: "$red", align: [right, top], wrap: false, text: "- R$ 32,50"}
+
+  - elementId: rec-line-3
+    elementType: shape
+    bounds: [288, 776, 704, 1]
+    shapeName: rect
+    fill: {type: solid, color: "$border"}
+
+  # Linha 4 — Netflix
+  - elementId: rec4-chip
+    elementType: shape
+    bounds: [288, 788, 32, 32]
+    shapeName: roundRect
+    adjustments: [22000]
+    fill: {type: solid, color: "#2E1F2C"}
+  - elementId: rec4-icon
+    elementType: icon
+    bounds: [297, 797, 14, 14]
+    iconName: "fas:repeat"
+    fill: {type: solid, color: "$purple"}
+  - elementId: rec4-desc
+    elementType: text
+    bounds: [332, 786, 320, 16]
+    content: {style: "$body", wrap: false, text: Netflix}
+  - elementId: rec4-meta
+    elementType: text
+    bounds: [332, 804, 320, 12]
+    content: {style: "$muted", wrap: false, text: "Assinaturas · 10/11"}
+  - elementId: rec4-val
+    elementType: text
+    bounds: [700, 794, 292, 18]
+    content: {fontFamily: Inter, fontSize: 13, bold: true, color: "$red", align: [right, top], wrap: false, text: "- R$ 55,90"}
+
+  # ================= Distribuição de gastos =================
+  - elementId: dist-card
+    elementType: shape
+    bounds: [1036, 548, 372, 280]
+    shapeName: roundRect
+    adjustments: [4000]
+    fill: {type: solid, color: "$surface"}
+    border: {style: solid, width: 1, color: "$border"}
+  - elementId: dist-title
+    elementType: text
+    bounds: [1060, 566, 300, 18]
+    content:
+      style: "$cardTitle"
+      wrap: false
+      text: Distribuição de gastos
+
+  - elementId: dist1-label
+    elementType: text
+    bounds: [1060, 598, 180, 14]
+    content: {fontFamily: Inter, fontSize: 12, color: "$body", wrap: false, text: Alimentação}
+  - elementId: dist1-val
+    elementType: text
+    bounds: [1260, 598, 132, 14]
+    content: {style: "$muted", align: [right, top], wrap: false, text: "R$ 1.412"}
+  - elementId: dist1-track
+    elementType: shape
+    bounds: [1060, 618, 332, 6]
+    shapeName: roundRect
+    adjustments: [50000]
+    fill: {type: solid, color: "$surfaceAlt"}
+  - elementId: dist1-fill
+    elementType: shape
+    bounds: [1060, 618, 332, 6]
+    shapeName: roundRect
+    adjustments: [50000]
+    fill: {type: solid, color: "$blue"}
+
+  - elementId: dist2-label
+    elementType: text
+    bounds: [1060, 642, 180, 14]
+    content: {fontFamily: Inter, fontSize: 12, color: "$body", wrap: false, text: Moradia}
+  - elementId: dist2-val
+    elementType: text
+    bounds: [1260, 642, 132, 14]
+    content: {style: "$muted", align: [right, top], wrap: false, text: "R$ 1.200"}
+  - elementId: dist2-track
+    elementType: shape
+    bounds: [1060, 662, 332, 6]
+    shapeName: roundRect
+    adjustments: [50000]
+    fill: {type: solid, color: "$surfaceAlt"}
+  - elementId: dist2-fill
+    elementType: shape
+    bounds: [1060, 662, 282, 6]
+    shapeName: roundRect
+    adjustments: [50000]
+    fill: {type: solid, color: "$accent"}
+
+  - elementId: dist3-label
+    elementType: text
+    bounds: [1060, 686, 180, 14]
+    content: {fontFamily: Inter, fontSize: 12, color: "$body", wrap: false, text: Transporte}
+  - elementId: dist3-val
+    elementType: text
+    bounds: [1260, 686, 132, 14]
+    content: {style: "$muted", align: [right, top], wrap: false, text: "R$ 640"}
+  - elementId: dist3-track
+    elementType: shape
+    bounds: [1060, 706, 332, 6]
+    shapeName: roundRect
+    adjustments: [50000]
+    fill: {type: solid, color: "$surfaceAlt"}
+  - elementId: dist3-fill
+    elementType: shape
+    bounds: [1060, 706, 149, 6]
+    shapeName: roundRect
+    adjustments: [50000]
+    fill: {type: solid, color: "$amber"}
+
+  - elementId: dist4-label
+    elementType: text
+    bounds: [1060, 730, 180, 14]
+    content: {fontFamily: Inter, fontSize: 12, color: "$body", wrap: false, text: Lazer}
+  - elementId: dist4-val
+    elementType: text
+    bounds: [1260, 730, 132, 14]
+    content: {style: "$muted", align: [right, top], wrap: false, text: "R$ 480"}
+  - elementId: dist4-track
+    elementType: shape
+    bounds: [1060, 750, 332, 6]
+    shapeName: roundRect
+    adjustments: [50000]
+    fill: {type: solid, color: "$surfaceAlt"}
+  - elementId: dist4-fill
+    elementType: shape
+    bounds: [1060, 750, 113, 6]
+    shapeName: roundRect
+    adjustments: [50000]
+    fill: {type: solid, color: "$purple"}
+
+  - elementId: dist5-label
+    elementType: text
+    bounds: [1060, 774, 180, 14]
+    content: {fontFamily: Inter, fontSize: 12, color: "$body", wrap: false, text: Saúde}
+  - elementId: dist5-val
+    elementType: text
+    bounds: [1260, 774, 132, 14]
+    content: {style: "$muted", align: [right, top], wrap: false, text: "R$ 481"}
+  - elementId: dist5-track
+    elementType: shape
+    bounds: [1060, 794, 332, 6]
+    shapeName: roundRect
+    adjustments: [50000]
+    fill: {type: solid, color: "$surfaceAlt"}
+  - elementId: dist5-fill
+    elementType: shape
+    bounds: [1060, 794, 113, 6]
+    shapeName: roundRect
+    adjustments: [50000]
+    fill: {type: solid, color: "$red"}
