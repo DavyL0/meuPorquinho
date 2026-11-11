@@ -31,27 +31,36 @@ meuPorquinho/
 
 ## Como rodar
 
+### 0. Variáveis de ambiente
+
+```bash
+cp .env.example .env   # Windows: copy .env.example .env
+```
+
+Edite o `.env` e defina as senhas e o `JWT_SECRET` (gere um segredo forte com
+`openssl rand -base64 48`). O `.env` nunca é commitado — está no `.gitignore`.
+
 ### 1. Banco de dados
 
 ```bash
 docker compose up -d
 ```
 
-Sobe o PostgreSQL em `localhost:5432` (banco `financas`) e o pgAdmin em
-<http://localhost:5050> (login: `admin@financas.local` / `admin123`).
-
-> ⚠️ As credenciais do `docker-compose.yml` são **apenas para desenvolvimento
-> local**. Não use esses valores em produção.
+Sobe o PostgreSQL em `localhost:5432` e o pgAdmin em <http://localhost:5050>,
+usando as credenciais do seu `.env`.
 
 ### 2. Backend
 
 ```bash
+export JWT_SECRET=<o-mesmo-valor-do-seu-.env>   # Windows: set JWT_SECRET=...
 cd backend/porquinho
 ./mvnw spring-boot:run    # Windows: mvnw.cmd spring-boot:run
 ```
 
-A API sobe em <http://localhost:8080>. O Flyway aplica as migrations de
-`src/main/resources/db/migration` automaticamente na primeira execução.
+A API sobe em <http://localhost:8080>. Sem `JWT_SECRET` definido, a aplicação
+não inicia (falha rápida de propósito, para nunca rodar com segredo padrão).
+O Flyway aplica as migrations de `src/main/resources/db/migration`
+automaticamente na primeira execução.
 
 ### 3. Frontend
 
@@ -64,20 +73,19 @@ npm start
 Aplicação em <http://localhost:4200>. Crie uma conta pela tela de registro e
 faça login.
 
-## Variáveis de ambiente (backend)
+## Variáveis de ambiente
 
-Definidas em `backend/porquinho/src/main/resources/application.yaml`, com
-possibilidade de override por variável de ambiente:
+Todas as credenciais vivem no `.env` (não versionado). O versionado é apenas o
+modelo [.env.example](.env.example). O backend lê as variáveis de ambiente do
+sistema; o Docker Compose lê o `.env` automaticamente.
 
-| Variável          | Descrição                              | Padrão (dev)  |
-|-------------------|----------------------------------------|---------------|
-| `JWT_SECRET`      | Chave HMAC (Base64) para assinar tokens| ⚠️ ver nota   |
-| `JWT_EXPIRATION`  | Validade do token em milissegundos     | `3600000` (1h)|
-
-> ⚠️ **Segurança:** o `application.yaml` traz um segredo JWT padrão apenas
-> para desenvolvimento. Em produção, defina `JWT_SECRET` como variável de
-> ambiente e nunca commite segredos reais — o `.gitignore` já cobre arquivos
-> `.env` e afins.
+| Variável                   | Usada por       | Descrição                                      |
+|----------------------------|-----------------|------------------------------------------------|
+| `JWT_SECRET`               | Backend         | Chave HMAC (Base64) para assinar tokens — **obrigatória** |
+| `JWT_EXPIRATION`           | Backend         | Validade do token em ms (padrão: `3600000` = 1h) |
+| `DB_URL` / `DB_USERNAME` / `DB_PASSWORD` | Backend | Conexão com o Postgres (padrões apontam para o Docker local) |
+| `POSTGRES_DB` / `POSTGRES_USER` / `POSTGRES_PASSWORD` | Docker Compose | Credenciais do banco |
+| `PGADMIN_DEFAULT_EMAIL` / `PGADMIN_DEFAULT_PASSWORD` | Docker Compose | Login do pgAdmin |
 
 ## Endpoints da API
 
