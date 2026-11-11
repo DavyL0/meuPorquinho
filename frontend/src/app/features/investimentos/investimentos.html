@@ -4,7 +4,7 @@
     <div class="topbar-sub">Alertas de cripto com cotação da Binance, notificados por e-mail</div>
   </div>
   <div class="topbar-actions">
-    <button class="btn btn-ghost" (click)="carregar()">🔄 Atualizar cotações</button>
+    <button class="btn btn-ghost" (click)="carregar()">Atualizar cotações</button>
   </div>
 </div>
 
@@ -73,7 +73,7 @@
         </div>
       </div>
       <button type="submit" class="btn btn-primary" [disabled]="salvando()">
-        @if (salvando()) { Salvando... } @else { 🔔 Criar alerta }
+        @if (salvando()) { Salvando... } @else { Criar alerta }
       </button>
     </form>
   </div>
@@ -154,11 +154,11 @@
                   @if (!inv.ativo) {
                     <button class="icon-btn"
                             (click)="reativar(inv)"
-                            title="Reativar alerta">🔔</button>
+                            title="Reativar alerta">Reativar</button>
                   }
                   <button class="icon-btn"
                           (click)="remover(inv)"
-                          title="Remover">🗑</button>
+                          title="Remover">Excluir</button>
                 </td>
               </tr>
             }

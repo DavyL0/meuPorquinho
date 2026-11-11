@@ -4,7 +4,6 @@
   <aside class="sidebar">
     <div class="logo">
       <div class="logo-mark">
-        <div class="logo-icon">💰</div>
         <div>
           <div class="logo-text">Porquinho</div>
           <div class="logo-sub">Finanças pessoais</div>
@@ -19,14 +18,13 @@
         <a class="nav-item"
            [routerLink]="item.route"
            routerLinkActive="active">
-          <span class="icon">{{ item.icon }}</span>
           {{ item.label }}
         </a>
       }
 
       <p class="nav-label">Conta</p>
       <button class="nav-item" (click)="sair()">
-        <span class="icon">🚪</span> Sair
+        Sair
       </button>
     </nav>
 

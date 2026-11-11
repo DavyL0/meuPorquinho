@@ -2,7 +2,6 @@
   <div class="login-card">
 
     <div class="login-logo">
-      <div class="logo-icon">💰</div>
       <h1>Porquinho</h1>
       <p>Crie sua conta gratuita</p>
     </div>
@@ -45,7 +44,7 @@
           <button type="button"
                   class="toggle-senha"
                   (click)="senhaVisivel.set(!senhaVisivel())">
-            {{ senhaVisivel() ? '🙈' : '👁' }}
+            {{ senhaVisivel() ? 'Ocultar' : 'Mostrar' }}
           </button>
         </div>
         @if (invalido('senha')) {

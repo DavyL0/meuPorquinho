@@ -24,17 +24,17 @@
           <div class="tipo-opt"
                [class.active-gasto]="tipoAtual === 'GASTO'"
                (click)="setTipo('GASTO')">
-            💸 Gasto
+            Gasto
           </div>
           <div class="tipo-opt"
                [class.active-invest]="tipoAtual === 'INVESTIMENTO'"
                (click)="setTipo('INVESTIMENTO')">
-            📈 Investimento
+            Investimento
           </div>
           <div class="tipo-opt"
                [class.active-entrada]="tipoAtual === 'ENTRADA'"
                (click)="setTipo('ENTRADA')">
-            💰 Entrada
+            Entrada
           </div>
         </div>
       </div>
@@ -109,7 +109,7 @@
         <button type="submit"
                 class="btn btn-primary"
                 [disabled]="loading()">
-          @if (loading()) { Salvando... } @else { ✓ Salvar lançamento }
+          @if (loading()) { Salvando... } @else { Salvar lançamento }
         </button>
         <button type="button"
                 class="btn btn-ghost"

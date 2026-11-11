@@ -16,12 +16,12 @@ export class ShellComponent {
   usuario = this.authService.getUsuario();
 
   navItems = [
-    { label: 'Dashboard', icon: '📊', route: '/dashboard' },
-    { label: 'Novo lançamento', icon: '➕', route: '/lancamentos' },
-    { label: 'Histórico', icon: '📋', route: '/historico' },
-    { label: 'Relatórios', icon: '📈', route: '/relatorios' },
-    { label: 'Investimentos', icon: '🪙', route: '/investimentos' },
-    { label: 'Perfil', icon: '👤', route: '/perfil' },
+    { label: 'Dashboard', route: '/dashboard' },
+    { label: 'Novo lançamento', route: '/lancamentos' },
+    { label: 'Histórico', route: '/historico' },
+    { label: 'Relatórios', route: '/relatorios' },
+    { label: 'Investimentos', route: '/investimentos' },
+    { label: 'Perfil', route: '/perfil' },
   ];
 
   sair() {
