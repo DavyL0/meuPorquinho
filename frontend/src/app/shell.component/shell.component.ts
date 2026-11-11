@@ -15,15 +15,6 @@ export class ShellComponent {
 
   usuario = this.authService.getUsuario();
 
-  navItems = [
-    { label: 'Dashboard', route: '/dashboard' },
-    { label: 'Novo lançamento', route: '/lancamentos' },
-    { label: 'Histórico', route: '/historico' },
-    { label: 'Relatórios', route: '/relatorios' },
-    { label: 'Investimentos', route: '/investimentos' },
-    { label: 'Perfil', route: '/perfil' },
-  ];
-
   sair() {
     this.authService.logout();
     this.router.navigate(['/login']);

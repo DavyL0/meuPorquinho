@@ -15,3 +15,8 @@
   height: 130px;
   flex-shrink: 0;
 }
+
+/* Ícones dos últimos lançamentos, tingidos por tipo */
+.recente-icon.green { background: #34d3991a; color: var(--green); }
+.recente-icon.red { background: #f871711a; color: var(--red); }
+.recente-icon.purple { background: #a78bfa1a; color: var(--purple); }

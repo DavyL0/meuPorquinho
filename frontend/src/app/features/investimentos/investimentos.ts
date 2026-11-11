@@ -2,6 +2,7 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InvestimentoService } from '../../core/services/investimento.service';
+import { AuthService } from '../../core/services/auth.service';
 import {
   DirecaoAlerta,
   Investimento,
@@ -17,6 +18,9 @@ import {
 export class InvestimentosComponent implements OnInit {
   private fb = inject(FormBuilder);
   private service = inject(InvestimentoService);
+  private authService = inject(AuthService);
+
+  readonly emailUsuario = this.authService.getUsuario()?.email ?? '';
 
   readonly simbolos = [
     'BTCBRL',
@@ -118,6 +122,6 @@ export class InvestimentosComponent implements OnInit {
   }
 
   descricaoDirecao(d: DirecaoAlerta): string {
-    return d === 'ALTA' ? '📈 Alta' : d === 'QUEDA' ? '📉 Queda' : '⚡ Alta ou queda';
+    return d === 'ALTA' ? 'Somente alta' : d === 'QUEDA' ? 'Somente queda' : 'Alta ou queda';
   }
 }

@@ -4,17 +4,18 @@
    ============================================================ */
 
 :root {
-  --bg: #0f1420;
-  --bg-soft: #131929;
-  --card: #171d2b;
-  --border: #232a3a;
-  --text: #e5e9f0;
-  --text-muted: #8b93a7;
-  --blue: #4f8ef7;
-  --red: #ef4444;
-  --purple: #7c3aed;
-  --green: #22c55e;
-  --amber: #f59e0b;
+  --bg: #0b0e14;
+  --bg-soft: #0e1219;
+  --card: #131924;
+  --border: #1e2633;
+  --text: #e8ecf3;
+  --text-muted: #8b95a8;
+  --blue: #5b9dff;
+  --red: #f87171;
+  --purple: #a78bfa;
+  --green: #34d399;
+  --amber: #fbbf24;
+  --primary: #3ddc97;
   --radius: 14px;
 }
 
@@ -1118,6 +1119,259 @@ tbody tr:hover {
 .delta-up { color: var(--green); }
 .delta-down { color: var(--red); }
 
+/* ============================================================
+   Redesign — identidade verde + ícones SVG
+   (regras depois das originais para sobrescrever)
+   ============================================================ */
+
+/* Ícones SVG (estilo feather/lucide, herdam a cor do texto) */
+.ic {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+.ic-sm { width: 15px; height: 15px; }
+.ic-lg { width: 22px; height: 22px; }
+
+/* Ação primária em verde */
+.btn-primary {
+  background: var(--primary);
+  color: #052e1f;
+}
+
+.login-btn {
+  background: var(--primary);
+  color: #052e1f;
+}
+
+input:focus,
+select:focus {
+  border-color: var(--primary);
+}
+
+.nav-item.active {
+  background: #3ddc9714;
+  color: var(--primary);
+}
+
+.period-btn.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #052e1f;
+}
+
+.stat-val {
+  color: var(--primary);
+}
+
+/* Logo com ícone */
+.logo-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  background: #3ddc971a;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.login-logo .logo-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  margin: 0 auto;
+}
+
+/* ---------------- Métricas com ícone + delta ---------------- */
+
+.metric-card {
+  border-top: none;
+}
+
+.metric-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.metric-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.metric-icon.green { background: #34d3991a; color: var(--green); }
+.metric-icon.red { background: #f871711a; color: var(--red); }
+.metric-icon.purple { background: #a78bfa1a; color: var(--purple); }
+.metric-icon.blue { background: #5b9dff1a; color: var(--blue); }
+
+.metric-label {
+  margin-bottom: 2px;
+}
+
+.metric-delta {
+  font-size: 12px;
+}
+
+.metric-delta.pos { color: var(--green); }
+.metric-delta.neg { color: var(--red); }
+.metric-delta.mut { color: var(--text-muted); }
+
+.metric-value {
+  color: var(--text);
+}
+
+/* Ícone dos lançamentos recentes por categoria */
+.recente-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ---------------- Status de alerta (Investimentos) ---------------- */
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.status-monitorando {
+  background: #34d3991a;
+  border: 1px solid #34d39940;
+  color: var(--green);
+}
+
+.status-disparado {
+  background: #fbbf241a;
+  border: 1px solid #fbbf2440;
+  color: var(--amber);
+}
+
+.form-footnote,
+.table-footnote {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.form-footnote {
+  margin-top: 14px;
+}
+
+.table-footnote {
+  padding: 13px 16px;
+  border-top: 1px solid var(--border);
+}
+
+/* ---------------- Novo lançamento: formulário + resumo ---------------- */
+
+.form-layout {
+  display: grid;
+  grid-template-columns: 1fr 330px;
+  gap: 22px;
+  align-items: start;
+}
+
+.form-card {
+  padding: 26px;
+}
+
+.resumo-card .section-title {
+  margin-bottom: 14px;
+}
+
+.resumo-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13.5px;
+}
+
+.resumo-row:last-child {
+  border-bottom: none;
+}
+
+.resumo-label {
+  color: var(--text-muted);
+}
+
+.resumo-val {
+  font-weight: 700;
+}
+
+.resumo-val.red { color: var(--red); }
+.resumo-val.green { color: var(--green); }
+.resumo-val.blue { color: var(--blue); }
+
+.dica-card {
+  background: #3ddc970f;
+  border: 1px solid #3ddc9730;
+  border-radius: var(--radius);
+  padding: 18px 20px;
+}
+
+.dica-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.dica-text {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Tipo de lançamento com ícone */
+.tipo-opt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Ações do formulário empilhadas em largura total */
+.form-actions-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.form-actions-stack .btn {
+  width: 100%;
+  justify-content: center;
+  padding: 13px;
+  font-size: 15px;
+}
+
 /* ---------------- Responsivo ---------------- */
 
 @media (max-width: 1024px) {
@@ -1127,7 +1381,8 @@ tbody tr:hover {
   }
 
   .grid-2,
-  .comp-grid {
+  .comp-grid,
+  .form-layout {
     grid-template-columns: 1fr;
   }
 }
