@@ -103,12 +103,13 @@
     <div class="chart-title">Evolução mensal</div>
     <div class="chart-sub">Entradas, gastos e investimentos mês a mês</div>
     @if (evolucao().length) {
-      <canvas baseChart
-              [data]="barData()"
-              [options]="barOptions"
-              type="bar"
-              style="max-height:260px">
-      </canvas>
+      <div class="chart-box">
+        <canvas baseChart
+                [data]="barData()"
+                [options]="barOptions"
+                type="bar">
+        </canvas>
+      </div>
     } @else {
       <div class="empty">
         <div class="empty-icon">📈</div>
