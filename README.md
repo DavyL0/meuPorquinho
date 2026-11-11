@@ -31,6 +31,16 @@ meuPorquinho/
 
 ## Como rodar
 
+### Opção rápida (Windows)
+
+Duplo clique em **`iniciar.bat`** na raiz — ele sobe PostgreSQL, backend e
+frontend em janelas separadas, carregando as variáveis do `.env`
+automaticamente. Acesse <http://localhost:4200> quando o build do Angular
+terminar. Para parar, feche as janelas "Porquinho - Backend" e
+"Porquinho - Frontend".
+
+### Opção manual
+
 ### 0. Variáveis de ambiente
 
 ```bash
