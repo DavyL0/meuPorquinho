@@ -1,17 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideRouter } from '@angular/router';
 
-import { Historico } from './historico';
+import { HistoricoComponent } from './historico';
 
-describe('Historico', () => {
-  let component: Historico;
-  let fixture: ComponentFixture<Historico>;
+describe('HistoricoComponent', () => {
+  let component: HistoricoComponent;
+  let fixture: ComponentFixture<HistoricoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Historico],
+      imports: [HistoricoComponent],
+      providers: [provideHttpClient(), provideRouter([])],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Historico);
+    fixture = TestBed.createComponent(HistoricoComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

@@ -1,0 +1,70 @@
+<div class="login-page">
+  <div class="login-card">
+
+    <div class="login-logo">
+      <div class="logo-icon">💰</div>
+      <h1>Porquinho</h1>
+      <p>Crie sua conta gratuita</p>
+    </div>
+
+    @if (erro()) {
+      <div class="alert-error">{{ erro() }}</div>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="registrar()">
+
+      <div class="field">
+        <label>Nome</label>
+        <input formControlName="nome"
+               type="text"
+               placeholder="Seu nome"
+               [class.input-error]="invalido('nome')"/>
+        @if (invalido('nome')) {
+          <span class="field-error">Informe seu nome (mínimo 2 caracteres).</span>
+        }
+      </div>
+
+      <div class="field">
+        <label>E-mail</label>
+        <input formControlName="email"
+               type="email"
+               placeholder="seu@email.com"
+               [class.input-error]="invalido('email')"/>
+        @if (invalido('email')) {
+          <span class="field-error">Informe um e-mail válido.</span>
+        }
+      </div>
+
+      <div class="field">
+        <label>Senha</label>
+        <div class="input-wrap">
+          <input formControlName="senha"
+                 [type]="senhaVisivel() ? 'text' : 'password'"
+                 placeholder="Mínimo 6 caracteres"
+                 [class.input-error]="invalido('senha')"/>
+          <button type="button"
+                  class="toggle-senha"
+                  (click)="senhaVisivel.set(!senhaVisivel())">
+            {{ senhaVisivel() ? '🙈' : '👁' }}
+          </button>
+        </div>
+        @if (invalido('senha')) {
+          <span class="field-error">A senha deve ter no mínimo 6 caracteres.</span>
+        }
+      </div>
+
+      <button type="submit"
+              class="login-btn"
+              [disabled]="loading()">
+        @if (loading()) { Criando conta... } @else { Criar conta }
+      </button>
+
+    </form>
+
+    <div class="login-footer">
+      Já tem conta?
+      <a routerLink="/login" class="login-link">Entrar</a>
+    </div>
+
+  </div>
+</div>
