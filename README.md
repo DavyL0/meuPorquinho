@@ -24,6 +24,19 @@ meuPorquinho/
 └── docker-compose.yml   # Postgres + pgAdmin
 ```
 
+## Interface
+
+Tema escuro com identidade verde, navegação por barra lateral e ícones SVG
+(sem emojis na interface). O layout implementado no frontend segue o redesign
+versionado em [`design/`](design/porquinho-redesign/porquinho-redesign.kanva.pptd):
+
+- **Dashboard** — métricas do mês com variação em relação ao mês anterior,
+  evolução de 6 meses, gastos por categoria e últimos lançamentos.
+- **Novo lançamento** — formulário com painel lateral "Resumo do mês"
+  (totais, maior categoria e último registro em tempo real).
+- **Investimentos** — cadastro de alertas em linha, pills de status
+  (`Monitorando`/`Disparado`) e cotação atual de cada ativo.
+
 ## Pré-requisitos
 
 - [Docker](https://www.docker.com/) (para o banco de dados)
