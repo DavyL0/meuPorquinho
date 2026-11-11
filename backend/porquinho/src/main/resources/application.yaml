@@ -54,9 +54,3 @@ monitoramento:
 
 app:
   mail-from: ${MAIL_FROM:Porquinho <no-reply@porquinho.local>}
-
-jwt:
-  # OBRIGATÓRIO: defina a variável de ambiente JWT_SECRET (Base64).
-  # Gere uma com: openssl rand -base64 48
-  secret: ${JWT_SECRET}
-  expiration: ${JWT_EXPIRATION:3600000}
