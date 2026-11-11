@@ -698,6 +698,40 @@ tbody tr:hover {
   background: #ef44441f;
 }
 
+/* Ações de tabela — pills com cor semântica */
+.action-btn {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+
+.action-btn-reativar {
+  background: #fbbf241f;
+  border-color: #fbbf244d;
+  color: #fbbf24;
+}
+
+.action-btn-reativar:hover {
+  background: #fbbf2438;
+}
+
+.action-btn-excluir {
+  background: #f871711a;
+  border-color: #f8717140;
+  color: #f87171;
+  margin-left: 8px;
+}
+
+.action-btn-excluir:hover {
+  background: #f8717133;
+}
+
 .pagination {
   display: flex;
   align-items: center;
