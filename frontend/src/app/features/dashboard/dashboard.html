@@ -53,11 +53,13 @@
       <div class="chart-title">Evolução mensal</div>
       <div class="chart-sub">Últimos 6 meses</div>
       @if (evolucao().length) {
-        <canvas baseChart
-                [data]="barData()"
-                [options]="barOptions"
-                type="bar">
-        </canvas>
+        <div class="chart-box">
+          <canvas baseChart
+                  [data]="barData()"
+                  [options]="barOptions"
+                  type="bar">
+          </canvas>
+        </div>
       } @else {
         <div class="empty">
           <div class="empty-icon">📊</div>
@@ -73,12 +75,13 @@
       <div class="chart-sub">{{ mesAtual() | date:'MMMM yyyy':'':'pt' }}</div>
       @if (categorias().length) {
         <div class="donut-wrap">
-          <canvas baseChart
-                  [data]="donutData()"
-                  [options]="donutOptions"
-                  type="doughnut"
-                  style="max-width:130px">
-          </canvas>
+          <div class="donut-chart">
+            <canvas baseChart
+                    [data]="donutData()"
+                    [options]="donutOptions"
+                    type="doughnut">
+            </canvas>
+          </div>
           <div class="donut-legend">
             @for (cat of categorias(); track cat.categoria) {
               <div class="legend-item">
