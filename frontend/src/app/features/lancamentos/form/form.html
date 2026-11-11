@@ -1,123 +1,178 @@
 <div class="topbar">
   <div>
     <div class="topbar-title">Novo lançamento</div>
-    <div class="topbar-sub">Registre uma entrada, gasto ou investimento</div>
+    <div class="topbar-sub">Registre uma entrada, gasto ou investimento.</div>
   </div>
 </div>
 
 <div class="content">
-  <div class="form-section">
+  <div class="form-layout">
 
-    @if (sucesso()) {
-      <div class="alert-success">✓ Lançamento registrado com sucesso!</div>
-    }
-    @if (erro()) {
-      <div class="alert-error">{{ erro() }}</div>
-    }
+    <!-- Formulário -->
+    <div class="card form-card">
 
-    <form [formGroup]="form" (ngSubmit)="salvar()">
-
-      <!-- Tipo -->
-      <div class="field">
-        <label>Tipo de lançamento</label>
-        <div class="tipo-selector">
-          <div class="tipo-opt"
-               [class.active-gasto]="tipoAtual === 'GASTO'"
-               (click)="setTipo('GASTO')">
-            💸 Gasto
-          </div>
-          <div class="tipo-opt"
-               [class.active-invest]="tipoAtual === 'INVESTIMENTO'"
-               (click)="setTipo('INVESTIMENTO')">
-            📈 Investimento
-          </div>
-          <div class="tipo-opt"
-               [class.active-entrada]="tipoAtual === 'ENTRADA'"
-               (click)="setTipo('ENTRADA')">
-            💰 Entrada
-          </div>
-        </div>
-      </div>
-
-      <!-- Valor + Data -->
-      <div class="field-row">
-        <div class="field">
-          <label>Valor (R$)</label>
-          <input formControlName="valor"
-                 type="number"
-                 step="0.01"
-                 placeholder="0,00"
-                 [class.input-error]="invalido('valor')"/>
-          @if (invalido('valor')) {
-            <span class="field-error">Informe um valor válido.</span>
-          }
-        </div>
-        <div class="field">
-          <label>Data</label>
-          <input formControlName="data"
-                 type="date"
-                 [class.input-error]="invalido('data')"/>
-        </div>
-      </div>
-
-      <!-- Descrição -->
-      <div class="field">
-        <label>Descrição</label>
-        <input formControlName="descricao"
-               type="text"
-               placeholder="Ex: Supermercado, Salário, PETR4..."
-               [class.input-error]="invalido('descricao')"/>
-        @if (invalido('descricao')) {
-          <span class="field-error">Descrição é obrigatória.</span>
-        }
-      </div>
-
-      <!-- Categoria + Pagamento (só para GASTO) -->
-      @if (mostrarCategoria) {
-        <div class="field-row">
-          <div class="field">
-            <label>Categoria</label>
-            <select formControlName="categoria">
-              @for (cat of categorias; track cat) {
-                <option [value]="cat">{{ cat }}</option>
-              }
-            </select>
-          </div>
-          <div class="field">
-            <label>Forma de pagamento</label>
-            <select formControlName="pagamento">
-              <option>Débito</option>
-              <option>Crédito</option>
-              <option>Pix</option>
-              <option>Dinheiro</option>
-              <option>Boleto</option>
-            </select>
-          </div>
-        </div>
+      @if (sucesso()) {
+        <div class="alert-success">✓ Lançamento registrado com sucesso!</div>
+      }
+      @if (erro()) {
+        <div class="alert-error">{{ erro() }}</div>
       }
 
-      <!-- Observação -->
-      <div class="field">
-        <label>Observação (opcional)</label>
-        <input formControlName="obs"
-               type="text"
-               placeholder="Detalhes adicionais..."/>
+      <form [formGroup]="form" (ngSubmit)="salvar()">
+
+        <!-- Tipo -->
+        <div class="field">
+          <label>Tipo de lançamento</label>
+          <div class="tipo-selector">
+            <div class="tipo-opt"
+                 [class.active-gasto]="tipoAtual === 'GASTO'"
+                 (click)="setTipo('GASTO')">
+              <svg class="ic ic-sm" viewBox="0 0 24 24">
+                <polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/>
+              </svg>
+              Gasto
+            </div>
+            <div class="tipo-opt"
+                 [class.active-entrada]="tipoAtual === 'ENTRADA'"
+                 (click)="setTipo('ENTRADA')">
+              <svg class="ic ic-sm" viewBox="0 0 24 24">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
+              </svg>
+              Entrada
+            </div>
+            <div class="tipo-opt"
+                 [class.active-invest]="tipoAtual === 'INVESTIMENTO'"
+                 (click)="setTipo('INVESTIMENTO')">
+              <svg class="ic ic-sm" viewBox="0 0 24 24">
+                <circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/>
+              </svg>
+              Investimento
+            </div>
+          </div>
+        </div>
+
+        <!-- Valor + Data -->
+        <div class="field-row">
+          <div class="field">
+            <label>Valor (R$)</label>
+            <input formControlName="valor"
+                   type="number"
+                   step="0.01"
+                   placeholder="0,00"
+                   [class.input-error]="invalido('valor')"/>
+            @if (invalido('valor')) {
+              <span class="field-error">Informe um valor válido.</span>
+            }
+          </div>
+          <div class="field">
+            <label>Data</label>
+            <input formControlName="data"
+                   type="date"
+                   [class.input-error]="invalido('data')"/>
+          </div>
+        </div>
+
+        <!-- Descrição -->
+        <div class="field">
+          <label>Descrição</label>
+          <input formControlName="descricao"
+                 type="text"
+                 placeholder="Ex: Supermercado, salário, combustível..."
+                 [class.input-error]="invalido('descricao')"/>
+          @if (invalido('descricao')) {
+            <span class="field-error">Descrição é obrigatória.</span>
+          }
+        </div>
+
+        <!-- Categoria + Pagamento (só para GASTO) -->
+        @if (mostrarCategoria) {
+          <div class="field-row">
+            <div class="field">
+              <label>Categoria</label>
+              <select formControlName="categoria">
+                @for (cat of categorias; track cat) {
+                  <option [value]="cat">{{ cat }}</option>
+                }
+              </select>
+            </div>
+            <div class="field">
+              <label>Forma de pagamento</label>
+              <select formControlName="pagamento">
+                <option>Débito</option>
+                <option>Crédito</option>
+                <option>Pix</option>
+                <option>Dinheiro</option>
+                <option>Boleto</option>
+              </select>
+            </div>
+          </div>
+        }
+
+        <!-- Ações -->
+        <div class="form-actions-stack">
+          <button type="submit"
+                  class="btn btn-primary"
+                  [disabled]="loading()">
+            <svg class="ic ic-sm" viewBox="0 0 24 24">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            @if (loading()) { Salvando... } @else { Salvar lançamento }
+          </button>
+          <button type="button"
+                  class="btn btn-ghost"
+                  (click)="limpar()">
+            Limpar formulário
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- Painel lateral -->
+    <div>
+      <div class="card resumo-card">
+        <div class="section-title">Resumo de {{ mesAtualLabel }}</div>
+        <div class="resumo-row">
+          <span class="resumo-label">Lançamentos no mês</span>
+          <span class="resumo-val">{{ totalMes() }}</span>
+        </div>
+        <div class="resumo-row">
+          <span class="resumo-label">Total em gastos</span>
+          <span class="resumo-val red">
+            {{ resumo()?.totalGastos | currency:'BRL':'symbol':'1.2-2' }}
+          </span>
+        </div>
+        <div class="resumo-row">
+          <span class="resumo-label">Total em entradas</span>
+          <span class="resumo-val green">
+            {{ resumo()?.totalEntradas | currency:'BRL':'symbol':'1.2-2' }}
+          </span>
+        </div>
+        <div class="resumo-row">
+          <span class="resumo-label">Maior categoria</span>
+          <span class="resumo-val blue">{{ maiorCategoria() }}</span>
+        </div>
+        <div class="resumo-row">
+          <span class="resumo-label">Último registro</span>
+          <span class="resumo-val">{{ ultimoRegistro() }}</span>
+        </div>
       </div>
 
-      <!-- Ações -->
-      <div class="form-actions">
-        <button type="submit"
-                class="btn btn-primary"
-                [disabled]="loading()">
-          @if (loading()) { Salvando... } @else { ✓ Salvar lançamento }
-        </button>
-        <button type="button"
-                class="btn btn-ghost"
-                (click)="limpar()">
-          Limpar
-        </button>
+      <div class="dica-card" style="margin-top:22px">
+        <div class="dica-head">
+          <svg class="ic" viewBox="0 0 24 24">
+            <path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2V5z"/>
+            <path d="M2 9v1c0 1.1.9 2 2 2h1"/>
+            <path d="M16 11h.01"/>
+          </svg>
+          Dica
+        </div>
+        <p class="dica-text">
+          Registrar gastos no mesmo dia melhora a precisão dos relatórios
+          e da sua taxa de economia mensal.
+        </p>
       </div>
+    </div>
 
-    </form>
   </div>
 </div>

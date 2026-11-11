@@ -10,7 +10,7 @@ import {
   ResumoMensal,
 } from '../../shared/models/resumo.model';
 
-const PALETA = ['#4f8ef7', '#ef4444', '#7c3aed', '#22c55e', '#f59e0b', '#06b6d4', '#ec4899', '#84cc16'];
+const PALETA = ['#5b9dff', '#34d399', '#fbbf24', '#a78bfa', '#f87171', '#22d3ee', '#f472b6', '#a3e635'];
 
 @Component({
   selector: 'app-relatorios',
@@ -82,17 +82,17 @@ export class RelatoriosComponent implements OnInit {
       {
         label: 'Entradas',
         data: this.evolucao().map((e) => e.entradas),
-        backgroundColor: '#4f8ef7',
+        backgroundColor: '#34d399',
       },
       {
         label: 'Gastos',
         data: this.evolucao().map((e) => e.gastos),
-        backgroundColor: '#ef4444',
+        backgroundColor: '#f87171',
       },
       {
         label: 'Investimentos',
         data: this.evolucao().map((e) => e.investimentos),
-        backgroundColor: '#7c3aed',
+        backgroundColor: '#a78bfa',
       },
     ],
   }));
@@ -100,10 +100,10 @@ export class RelatoriosComponent implements OnInit {
   barOptions: ChartOptions<'bar'> = {
     responsive: true,
     maintainAspectRatio: false,
-    plugins: { legend: { labels: { color: '#8b93a7' } } },
+    plugins: { legend: { labels: { color: '#8b95a8' } } },
     scales: {
-      x: { ticks: { color: '#8b93a7' }, grid: { color: '#232a3a' } },
-      y: { ticks: { color: '#8b93a7' }, grid: { color: '#232a3a' } },
+      x: { ticks: { color: '#8b95a8' }, grid: { color: '#1e2633' } },
+      y: { ticks: { color: '#8b95a8' }, grid: { color: '#1e2633' } },
     },
   };
 

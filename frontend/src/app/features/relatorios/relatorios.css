@@ -1,0 +1,6 @@
+/* Altura fixa do container do gráfico (evita crescimento infinito do Chart.js). */
+.chart-box {
+  position: relative;
+  width: 100%;
+  height: 260px;
+}

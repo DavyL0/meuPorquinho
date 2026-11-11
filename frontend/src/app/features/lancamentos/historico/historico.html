@@ -4,8 +4,13 @@
     <div class="topbar-sub">{{ total() }} lançamentos encontrados</div>
   </div>
   <div class="topbar-actions">
-    <button class="btn btn-ghost" (click)="exportarCsv()">⬇ Exportar CSV</button>
-    <a routerLink="/lancamentos" class="btn btn-primary">➕ Novo</a>
+    <button class="btn btn-ghost" (click)="exportarCsv()">Exportar CSV</button>
+    <a routerLink="/lancamentos" class="btn btn-primary">
+      <svg class="ic ic-sm" viewBox="0 0 24 24">
+        <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+      </svg>
+      Novo
+    </a>
   </div>
 </div>
 
@@ -40,7 +45,7 @@
         <label>Buscar</label>
         <input type="text"
                formControlName="busca"
-               placeholder="🔍 Descrição..."/>
+               placeholder="Descrição..."/>
       </div>
     </div>
   </div>
@@ -103,9 +108,9 @@
                   </span>
                 </td>
                 <td>
-                  <button class="icon-btn"
+                  <button class="action-btn action-btn-excluir"
                           (click)="remover(l.id)"
-                          title="Remover">🗑</button>
+                          title="Remover">Excluir</button>
                 </td>
               </tr>
             }

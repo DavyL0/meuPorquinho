@@ -1,0 +1,22 @@
+/*
+ * Containers com altura fixa para os gráficos Chart.js.
+ * Sem isso, com responsive:true + maintainAspectRatio:false,
+ * o canvas e o card entram em loop de crescimento infinito.
+ */
+.chart-box {
+  position: relative;
+  width: 100%;
+  height: 260px;
+}
+
+.donut-chart {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  flex-shrink: 0;
+}
+
+/* Ícones dos últimos lançamentos, tingidos por tipo */
+.recente-icon.green { background: #34d3991a; color: var(--green); }
+.recente-icon.red { background: #f871711a; color: var(--red); }
+.recente-icon.purple { background: #a78bfa1a; color: var(--purple); }

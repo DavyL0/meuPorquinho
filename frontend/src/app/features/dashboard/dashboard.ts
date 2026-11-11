@@ -6,11 +6,16 @@ import type { ChartOptions } from 'chart.js';
 import { AuthService } from '../../core/services/auth.service';
 import { ResumoService } from '../../core/services/resumo.service';
 import { LancamentoService } from '../../core/services/lancamento.service';
-import { Resumo, ResumoCategoria, ResumoMensal } from '../../shared/models/resumo.model';
+import {
+  Resumo,
+  ResumoCategoria,
+  ResumoComparativo,
+  ResumoMensal,
+} from '../../shared/models/resumo.model';
 import { Lancamento, TipoLancamento } from '../../shared/models/lancamento.model';
 import { UsuarioLogado } from '../../shared/models/usuario.model';
 
-const PALETA = ['#4f8ef7', '#ef4444', '#7c3aed', '#22c55e', '#f59e0b', '#06b6d4', '#ec4899', '#84cc16'];
+const PALETA = ['#5b9dff', '#34d399', '#fbbf24', '#a78bfa', '#f87171', '#22d3ee', '#f472b6', '#a3e635'];
 
 @Component({
   selector: 'app-dashboard',
@@ -27,6 +32,7 @@ export class DashboardComponent implements OnInit {
 
   mesAtual = signal(new Date().toISOString().slice(0, 7));
   resumo = signal<Resumo | null>(null);
+  comparativo = signal<ResumoComparativo | null>(null);
   categorias = signal<ResumoCategoria[]>([]);
   evolucao = signal<ResumoMensal[]>([]);
   recentes = signal<Lancamento[]>([]);
@@ -39,8 +45,10 @@ export class DashboardComponent implements OnInit {
 
   carregar() {
     const mes = this.mesAtual();
+    const anterior = this.mesAnterior(mes);
 
     this.resumoService.geral(mes).subscribe((r) => this.resumo.set(r));
+    this.resumoService.comparativo(mes, anterior).subscribe((c) => this.comparativo.set(c));
     this.resumoService.porCategoria(mes).subscribe((c) => this.categorias.set(c));
     this.resumoService.evolucao(6).subscribe((e) => this.evolucao.set(e));
     this.lancamentoService
@@ -53,23 +61,68 @@ export class DashboardComponent implements OnInit {
     this.carregar();
   }
 
+  /** "novembro" — nome do mês selecionado, em minúsculas. */
+  nomeMesAtual(): string {
+    return this.nomeMes(this.mesAtual());
+  }
+
+  /** "outubro" — nome do mês anterior ao selecionado. */
+  nomeMesAnterior(): string {
+    return this.nomeMes(this.mesAnterior(this.mesAtual()));
+  }
+
+  deltaEntradas(): { texto: string; classe: string } {
+    const v = this.comparativo()?.variacaoEntradas;
+    if (v == null) return { texto: 'sem dados de ' + this.nomeMesAnterior(), classe: 'mut' };
+    return {
+      texto: `${v > 0 ? '+' : ''}${v.toFixed(1).replace('.', ',')}% vs ${this.nomeMesAnterior()}`,
+      classe: v >= 0 ? 'pos' : 'neg',
+    };
+  }
+
+  deltaGastos(): { texto: string; classe: string } {
+    const v = this.comparativo()?.variacaoGastos;
+    if (v == null) return { texto: 'sem dados de ' + this.nomeMesAnterior(), classe: 'mut' };
+    return {
+      texto: `${v > 0 ? '+' : ''}${v.toFixed(1).replace('.', ',')}% vs ${this.nomeMesAnterior()}`,
+      // gasto maior é ruim (vermelho), gasto menor é bom (verde)
+      classe: v > 0 ? 'neg' : 'pos',
+    };
+  }
+
+  deltaInvestimentos(): { texto: string; classe: string } {
+    const c = this.comparativo();
+    if (!c) return { texto: '—', classe: 'mut' };
+    const diff = (c.mesAtual?.totalInvestimentos ?? 0) - (c.mesAnterior?.totalInvestimentos ?? 0);
+    if (diff === 0) return { texto: 'sem aportes no mês', classe: 'mut' };
+    const fmt = Math.abs(diff).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+    return { texto: `${diff > 0 ? '+' : '-'}${fmt} no mês`, classe: diff > 0 ? 'pos' : 'neg' };
+  }
+
+  margemSaldo(): { texto: string; classe: string } {
+    const r = this.resumo();
+    if (!r || !r.totalEntradas) return { texto: '—', classe: 'mut' };
+    const margem = Math.round((r.saldo / r.totalEntradas) * 100);
+    return { texto: `margem de ${margem}%`, classe: margem >= 0 ? 'pos' : 'neg' };
+  }
+
   barData = computed(() => ({
     labels: this.evolucao().map((e) => e.mesAno.slice(5)),
     datasets: [
       {
         label: 'Entradas',
         data: this.evolucao().map((e) => e.entradas),
-        backgroundColor: '#4f8ef7',
+        backgroundColor: '#34d399',
       },
       {
         label: 'Gastos',
         data: this.evolucao().map((e) => e.gastos),
-        backgroundColor: '#ef4444',
+        backgroundColor: '#f87171',
       },
       {
         label: 'Investimentos',
         data: this.evolucao().map((e) => e.investimentos),
-        backgroundColor: '#7c3aed',
+        backgroundColor: '#a78bfa',
       },
     ],
   }));
@@ -77,10 +130,10 @@ export class DashboardComponent implements OnInit {
   barOptions: ChartOptions<'bar'> = {
     responsive: true,
     maintainAspectRatio: false,
-    plugins: { legend: { labels: { color: '#8b93a7' } } },
+    plugins: { legend: { labels: { color: '#8b95a8' } } },
     scales: {
-      x: { ticks: { color: '#8b93a7' }, grid: { color: '#232a3a' } },
-      y: { ticks: { color: '#8b93a7' }, grid: { color: '#232a3a' } },
+      x: { ticks: { color: '#8b95a8' }, grid: { color: '#1e2633' } },
+      y: { ticks: { color: '#8b95a8' }, grid: { color: '#1e2633' } },
     },
   };
 
@@ -115,12 +168,37 @@ export class DashboardComponent implements OnInit {
     return max > 0 ? Math.round((total / max) * 100) : 0;
   }
 
-  iconeTipo(tipo: TipoLancamento): string {
-    return tipo === 'ENTRADA' ? '💰' : tipo === 'INVESTIMENTO' ? '📈' : '💸';
+  /** Chave do ícone SVG exibido na lista de últimos lançamentos. */
+  iconeLancamento(l: Lancamento): string {
+    if (l.tipo === 'ENTRADA') return 'wallet';
+    if (l.tipo === 'INVESTIMENTO') return 'trending';
+    const mapa: Record<string, string> = {
+      'Alimentação': 'cart',
+      'Moradia': 'home',
+      'Transporte': 'car',
+      'Saúde': 'heart',
+      'Educação': 'book',
+      'Lazer': 'smile',
+      'Compras': 'bag',
+      'Assinaturas': 'tv',
+      'Outros': 'dots',
+    };
+    return mapa[l.categoria ?? ''] ?? 'dots';
   }
 
-  bgTipo(tipo: TipoLancamento): string {
-    return tipo === 'ENTRADA' ? '#22c55e22' : tipo === 'INVESTIMENTO' ? '#7c3aed22' : '#ef444422';
+  classeIcone(tipo: TipoLancamento): string {
+    return tipo === 'ENTRADA' ? 'green' : tipo === 'INVESTIMENTO' ? 'purple' : 'red';
+  }
+
+  private mesAnterior(mesAno: string): string {
+    const [ano, mes] = mesAno.split('-').map(Number);
+    const d = new Date(ano, mes - 2, 1);
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+  }
+
+  private nomeMes(mesAno: string): string {
+    const [ano, mes] = mesAno.split('-').map(Number);
+    return new Intl.DateTimeFormat('pt-BR', { month: 'long' }).format(new Date(ano, mes - 1, 1));
   }
 
   private gerarMeses(quantidade: number) {

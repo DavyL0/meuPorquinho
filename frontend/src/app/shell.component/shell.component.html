@@ -4,7 +4,13 @@
   <aside class="sidebar">
     <div class="logo">
       <div class="logo-mark">
-        <div class="logo-icon">💰</div>
+        <span class="logo-icon">
+          <svg class="ic ic-lg" viewBox="0 0 24 24">
+            <path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2V5z"/>
+            <path d="M2 9v1c0 1.1.9 2 2 2h1"/>
+            <path d="M16 11h.01"/>
+          </svg>
+        </span>
         <div>
           <div class="logo-text">Porquinho</div>
           <div class="logo-sub">Finanças pessoais</div>
@@ -15,18 +21,50 @@
     <nav>
       <p class="nav-label">Principal</p>
 
-      @for (item of navItems; track item.route) {
-        <a class="nav-item"
-           [routerLink]="item.route"
-           routerLinkActive="active">
-          <span class="icon">{{ item.icon }}</span>
-          {{ item.label }}
-        </a>
-      }
+      <a class="nav-item" routerLink="/dashboard" routerLinkActive="active">
+        <svg class="ic" viewBox="0 0 24 24">
+          <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+          <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+        </svg>
+        Dashboard
+      </a>
+      <a class="nav-item" routerLink="/lancamentos" routerLinkActive="active">
+        <svg class="ic" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>
+        </svg>
+        Novo lançamento
+      </a>
+      <a class="nav-item" routerLink="/historico" routerLinkActive="active">
+        <svg class="ic" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+        </svg>
+        Histórico
+      </a>
+      <a class="nav-item" routerLink="/relatorios" routerLinkActive="active">
+        <svg class="ic" viewBox="0 0 24 24">
+          <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+        </svg>
+        Relatórios
+      </a>
+      <a class="nav-item" routerLink="/investimentos" routerLinkActive="active">
+        <svg class="ic" viewBox="0 0 24 24">
+          <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
+        </svg>
+        Investimentos
+      </a>
+      <a class="nav-item" routerLink="/perfil" routerLinkActive="active">
+        <svg class="ic" viewBox="0 0 24 24">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+        </svg>
+        Perfil
+      </a>
 
       <p class="nav-label">Conta</p>
       <button class="nav-item" (click)="sair()">
-        <span class="icon">🚪</span> Sair
+        <svg class="ic" viewBox="0 0 24 24">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
+        </svg>
+        Sair
       </button>
     </nav>
 

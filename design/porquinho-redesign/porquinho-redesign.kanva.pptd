@@ -1,0 +1,56 @@
+version: v2
+title: Porquinho — Redesign da interface
+size: [1440, 900]
+customFonts:
+  - family: Inter
+    src: "https://fonts.googleapis.com/css2?family=Inter"
+theme:
+  colors:
+    bg: "#0C0F14"
+    sidebar: "#0F1219"
+    surface: "#14181F"
+    surfaceAlt: "#1A1F29"
+    input: "#0F1319"
+    border: "#232A35"
+    text: "#E8EAEE"
+    body: "#C4CAD3"
+    muted: "#8A919E"
+    faint: "#5C6470"
+    accent: "#34D399"
+    accentDark: "#052E1F"
+    red: "#F87171"
+    amber: "#FBBF24"
+    purple: "#A78BFA"
+    blue: "#60A5FA"
+  textStyles:
+    h1:
+      fontSize: 26
+      bold: true
+      color: "$text"
+      fontFamily: Inter
+    cardTitle:
+      fontSize: 14
+      bold: true
+      color: "$text"
+      fontFamily: Inter
+    body:
+      fontSize: 13
+      color: "$body"
+      fontFamily: Inter
+    nav:
+      fontSize: 13
+      color: "$muted"
+      fontFamily: Inter
+    muted:
+      fontSize: 11
+      color: "$muted"
+      fontFamily: Inter
+    kpi:
+      fontSize: 22
+      bold: true
+      color: "$text"
+      fontFamily: Inter
+pages:
+  - pages/1_dashboard.page
+  - pages/2_investimentos.page
+  - pages/3_novo_lancamento.page
