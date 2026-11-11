@@ -1,7 +1,7 @@
 <div class="topbar">
   <div>
     <div class="topbar-title">Dashboard</div>
-    <div class="topbar-sub">Bem-vindo de volta, {{ usuario()?.nome }} 👋</div>
+    <div class="topbar-sub">Bem-vindo de volta, {{ usuario?.nome }} 👋</div>
   </div>
   <div class="topbar-actions">
     <select class="select-sm" (change)="onMesChange($any($event.target).value)">
